@@ -237,7 +237,6 @@ def main() -> None:
     persona_en = read_text(context["persona_en"])
     legacy_default_pt = read_text(context["legacy_default_pt"])
     legacy_default_en = read_text(context["legacy_default_en"])
-    job_description = read_text(job_file)
 
     required_blocks = {
         "career/career_master.md": career_master,
