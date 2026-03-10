@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Knowledge Base - John Doe</title>
+    <style>
+        :root {
+            --primary-color: #0f2b4e;
+            --accent-color: #2c5aa0;
+            --text-color: #333;
+            --light-text: #666;
+            --bg-color: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: var(--text-color);
+            background: var(--bg-color);
+            width: 210mm;
+            margin: 0 auto;
+            padding: 10mm 15mm;
+            background-color: white;
+            text-align: justify;
+        }
+
+        .header {
+            background-color: transparent;
+            color: var(--text-color);
+            padding: 0 0 15px 0;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 5px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        .header-title {
+            font-size: 11pt;
+            color: var(--accent-color);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-size: 9.3pt;
+            margin-top: 5px;
+        }
+
+        .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .section {
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .competency-item {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 9.5pt;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .competency-label {
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 170px;
+            flex-shrink: 0;
+            font-size: 9pt;
+        }
+
+        .job {
+            margin-bottom: 15px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3px;
+        }
+
+        .job-company {
+            font-weight: 700;
+            font-size: 10.5pt;
+            color: #222;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 10pt;
+            font-style: italic;
+        }
+
+        .job-date {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .job ul {
+            margin-left: 20px;
+            margin-top: 3px;
+        }
+
+        .job li {
+            margin-bottom: 2px;
+            color: #444;
+            font-size: 9.3pt;
+        }
+
+        .certifications-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 20px;
+            row-gap: 4px;
+        }
+
+        .certifications-list li {
+            list-style: none;
+            padding-left: 15px;
+            position: relative;
+            font-size: 9.5pt;
+        }
+
+        .certifications-list li::before {
+            content: "▪";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+        }
+
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 9.5pt;
+        }
+
+        @media print {
+            @page {
+                margin: 15mm;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>John Doe</h1>
+        <div class="header-title">Master Knowledge Base - 19+ Years of Excellence in IT & Security</div>
+        <div class="contact-info">
+            <a href="mailto:johndoe@example.com"> johndoe@example.com</a>
+            <a href="tel:+15551234567">+1 (555) 123-4567</a>
+            <a href="https://johndoe-portfolio.com">johndoe-portfolio.com</a>
+            <a href="https://www.linkedin.com/in/johndoe-834927163045">LinkedIn</a>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p>
+            User with a 19-year track record in the IT industry, evolving from hands-on support and full-stack
+            development to high-level <strong>Security Architecture</strong> and <strong>Governance</strong>. This file
+            serves as the <strong>MASTER KNOWLEDGE BASE</strong>, containing an exhaustive list of experiences across
+            Development (DevOps), Infrastructure, and Cyber Defense. Content from this file should be selected to
+            demonstrate a holistic understanding of the technology stack, from physical cabling to AI-driven Cloud
+            Security.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Core Competencies</h2>
+        <div class="competencies">
+            <div class="competency-item">
+                <span class="competency-label">Cybersecurity Governance (GRC)</span>
+                <span class="competency-content">Information Security Management (<strong>ISO 27001</strong>), Risk
+                    Management (<strong>ISO 27005</strong>), Regulatory Compliance (<strong>LGPD/GDPR</strong>), Privacy
+                    by Design, Security Awareness Training Programs.</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">Industrial Security (OT/ICS)</span>
+                <span class="competency-content">Hybrid OT/IT Architecture Defense, <strong>Ignition SCADA</strong>
+                    (Vision/Perspective), IIoT Protocols (MQTT, OPC-UA), Network Segmentation, Industrial Asset
+                    Protection.</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">Cloud & Infrastructure Security</span>
+                <span class="competency-content"><strong>AWS Security</strong> (IAM, GuardDuty, Macie, KMS, WAF),
+                    Infrastructure as Code (Terraform), Container Security (Docker), FinOps, Server Hardening
+                    (Linux/Windows).</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">SecOps & Incident Response</span>
+                <span class="competency-content">SIEM Implementation (Splunk), Threat Hunting, Vulnerability Management
+                    (Pentesting), <strong>Incident Response</strong> (Ransomware Containment), Endpoint Protection
+                    (EDR/XDR).</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">DevSecOps & Automation</span>
+                <span class="competency-content"><strong>Python/Bash</strong> Scripting for Security Automation, Secure
+                    SDLC, CI/CD Pipeline Integration, WAF Implementation, API Security.</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">AI & Data Innovation</span>
+                <span class="competency-content">Generative AI Architectures (<strong>LLM/RAG</strong>), Text-to-SQL
+                    Engines, Machine Learning (Predictive Analytics), Data Engineering (SQL/NoSQL).</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Professional Experience</h2>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Global Tech Solutions LLC</span> <span class="job-location">| Araxá -
+                        Remote</span>
+                    <div class="job-title">Systems Analyst and Cyber Security Architect</div>
+                </div>
+                <div class="job-date">06/2021 – Present</div>
+            </div>
+            <p style="margin-bottom: 6px; font-size: 9.5pt;"><strong>Core Competencies:</strong> Industrial
+                Cybersecurity (OT/IT), Ignition SCADA (Vision/Perspective), AI Solutions (LLM/RAG), Cloud-Native
+                Architecture, Data Protection & Privacy.</p>
+            <ul>
+                <li><strong>🛡️ Information Security & Cybersecurity Strategy:</strong>
+                    <ul>
+                        <li><strong>Architecture & Execution:</strong> Lead security architect for the Global Tech Project Nexus™
+                            project, designing robust defense strategies for hybrid infrastructures (On-Premises &
+                            Cloud-Native).</li>
+                        <li><strong>Compliance & Governance:</strong> Implemented and managed rigorous security controls
+                            and risk assessments based firmly on <strong>ISO/IEC 27001</strong>, <strong>ISO
+                                27005</strong>, and <strong>NIST CSF</strong> frameworks. Successfully strengthened the
+                            ISMS (Information Security Management System).
+                        </li>
+                        <li><strong>Cloud Security Alliance & DPO:</strong> Responsible for answering and implementing
+                            the <strong>CSA</strong> requirements, successfully executing <strong>CAIQ v3</strong>,
+                            <strong>CAIQ v4</strong>, and <strong>CCM</strong> questionnaires. Also serves as the
+                            <strong>Technical DPO</strong> for the <strong>Project Nexus™</strong> project, actively
+                            responding to area demands and ensuring strict GDPR alignment.
+                        </li>
+                        <li><strong>Red & Blue Teaming:</strong> Employed proactive security methodology combining
+                            offensive tactics (based on <strong>MITRE ATT&CK</strong> and <strong>OWASP</strong>) to
+                            identify vulnerabilities, and defensive strategies to mitigate risks and harden industrial
+                            assets.</li>
+                    </ul>
+                </li>
+                <li><strong>🏭 Automation, Industry 4.0 & Digital Transformation:</strong>
+                    <ul>
+                        <li><strong>Global MES/SCADA Rollout:</strong> Led end-to-end deployment for two of the world's
+                            largest breweries, utilizing the full <strong>Inductive Automation Ignition</strong> stack
+                            (Vision, Perspective & Custom Java Modules).</li>
+                        <li><strong>Full-Stack SCADA Development:</strong> Responsible for all aspects of SCADA/MES
+                            development using <strong>Ignition</strong>, <strong>Python (Jython)</strong>,
+                            <strong>Kotlin</strong>, and <strong>JavaScript</strong>.
+                        </li>
+                        <li><strong>Advanced Integration:</strong> Developed complex logic to orchestrate real-time data
+                            processing and seamless integration between OT devices and IT systems.</li>
+                        <li><strong>High-Performance Data Engineering:</strong> Managed high-availability database
+                            architectures combining <strong>SQL</strong> (PostgreSQL, MS SQL) and <strong>NoSQL</strong>
+                            (InfluxDB, MongoDB) to ensure data integrity for critical industrial operations.</li>
+                    </ul>
+                </li>
+                <li><strong>🤖 AI Innovation & Predictive Analytics:</strong>
+                    <ul>
+                        <li><strong>Machine Learning Implementation:</strong> Implemented <strong>ML models</strong>
+                            (Pandas, Scikit-learn, TensorFlow) to predict equipment failures, significantly reducing
+                            unplanned downtime.</li>
+                        <li><strong>GenAI & RAG Architecture:</strong> Built intelligent industrial assistants using
+                            <strong>LLM with RAG architecture</strong> (backed by Redis), empowering operators with
+                            accurate, context-aware troubleshooting knowledge.
+                        </li>
+                        <li><strong>Research & Development:</strong> Responsible for researching and developing new
+                            technologies to drive innovation across industrial operations.</li>
+                    </ul>
+                </li>
+                <li><strong>AWS Architecture & Cloud Management:</strong> Acting as a hands-on technical manager for the
+                    entire <strong>AWS</strong> ecosystem. Responsible for infrastructure provisioning via <strong>IaC
+                        (Infrastructure as Code)</strong>, serverless workloads (<strong>AWS Lambda</strong>), device
+                    connectivity (<strong>AWS IoT Core</strong>), storage (<strong>AWS S3</strong>), and
+                    <strong>Containers</strong> for secure, scalable deployments.
+                </li>
+                <li><strong>BI & Data Analytics (QuickSight):</strong> Architected and built dynamic business
+                    intelligence dashboards utilizing <strong>AWS QuickSight</strong>, tightly integrated with
+                    <strong>RDS</strong> databases to extract operational insights. Engineered the entire analytics
+                    infrastructure using <strong>IaC</strong> template development.
+                </li>
+                <li><strong>Advanced Networking & OT Diagnostics:</strong> Deep expertise across all network protocols
+                    and specialized services. Expert in conducting deep package inspections and diagnostics using tools
+                    such as <strong>Wireshark</strong>, <strong>Nmap</strong>, and <strong>Grassmarlin</strong>
+                    (specific for OT/ICS environments). Developed custom scripts for automated network diagnostics.
+                    Furthermore, holds full responsibility for the configuration, architecture, and orchestration of the
+                    <strong>AWS Network</strong> topology (VPCs, Subnets, Routing, Gateways).
+                </li>
+                <li><strong>SIEM & Advanced Monitoring:</strong> Responsible for managing the SIEM ecosystem using
+                    <strong>Wazuh</strong>, <strong>Elasticsearch</strong>, and <strong>Graylog</strong>. Architected
+                    and oversaw the complete observability stack utilizing <strong>Grafana</strong>,
+                    <strong>Zabbix</strong>, and <strong>Prometheus</strong> for continuous monitoring.
+                </li>
+                <li><strong>Automation & DevSecOps:</strong> Developed <strong>Python</strong> scripts to automate
+                    threat detection and response. Integrated security into the CI/CD pipeline (Secure SDLC).</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Enterprise IT Services</span> <span class="job-location">| Brazil</span>
+                    <div class="job-title">Support Engineer & Field Service Specialist</div>
+                </div>
+                <div class="job-date">12/2020 – 05/2021</div>
+            </div>
+            <ul>
+                <li><strong>Enterprise Field Service Operations:</strong> Delivered comprehensive on-site and remote
+                    technical support across multiple enterprise client locations (Financial, Healthcare, and Retail
+                    sectors), serving as the primary escalation point for complex infrastructure and endpoint issues.
+                    Maintained a <strong>95%+ first-call resolution rate</strong> on escalated tickets.
+                </li>
+                <li><strong>Server Administration (Windows & Linux):</strong>
+                    <ul>
+                        <li>Administered <strong>Windows Server</strong> (2012/2016/2019) environments including
+                            <strong>Active Directory</strong>, DNS, DHCP, File Services, and Print Services.
+                        </li>
+                        <li>Managed <strong>Linux</strong> servers (Debian, CentOS) for web hosting and internal
+                            applications, performing routine maintenance, log analysis, and security patching.</li>
+                        <li>Configured and maintained <strong>firewall rules</strong> (pfSense, Windows Firewall),
+                            VPN tunnels, and network ACLs to enforce perimeter security.</li>
+                    </ul>
+                </li>
+                <li><strong>Endpoint Security & Lifecycle Management:</strong>
+                    <ul>
+                        <li>Deployed and configured <strong>Kaspersky Endpoint Security</strong> and
+                            <strong>Microsoft Defender for Endpoint</strong> across enterprise environments,
+                            implementing full-disk encryption (BitLocker), antivirus policies, and DLP controls.
+                        </li>
+                        <li>Managed the full endpoint lifecycle — provisioning, imaging (SCCM/MDT), configuration,
+                            hardening, patch management, and secure decommissioning — for fleets of <strong>500+
+                                devices</strong>.</li>
+                    </ul>
+                </li>
+                <li><strong>Active Directory & Identity Management:</strong> Administered <strong>Active
+                        Directory</strong> objects including OUs, GPO deployment, user/group access control, domain
+                    joins, and DNS/DHCP troubleshooting. Ensured compliance with corporate security baselines.</li>
+                <li><strong>Network & Infrastructure Support:</strong>
+                    <ul>
+                        <li>Performed installation, configuration, and maintenance of IT infrastructure including
+                            servers, switches, access points, VoIP systems, printers, and end-user computing
+                            devices.</li>
+                        <li>Diagnosed and resolved complex network connectivity issues (TCP/IP, VPN, Wi-Fi, VLAN
+                            segmentation) across corporate and branch office environments.</li>
+                    </ul>
+                </li>
+                <li><strong>ITIL & Incident Management:</strong> Managed incidents and service requests through
+                    <strong>ServiceNow</strong>, following ITIL best practices for categorization, prioritization, and
+                    SLA compliance. Contributed to knowledge base articles to reduce recurring ticket volume by
+                    <strong>20%</strong>.
+                </li>
+                <li><strong>Workstation Deployment & Standardization:</strong> Configured and mass-deployed Windows
+                    workstations using <strong>SCCM/MDT</strong> imaging, ensuring adherence to corporate SOE (Standard
+                    Operating Environment), software packaging, network connectivity, and security baselines.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">FinTech Innovators</span> <span class="job-location">| Brazil</span>
+                    <div class="job-title">Information Security & Data Protection Consultant</div>
+                </div>
+                <div class="job-date">08/2020 – 11/2020</div>
+            </div>
+            <ul>
+                <li><strong>BACEN & ISO 27001 Regulatory Compliance:</strong>
+                    <ul>
+                        <li>Led the end-to-end security compliance project for <strong>BACEN</strong> (Central Bank of
+                            Brazil) regulations, acting as the primary consultant for regulatory alignment in the
+                            financial technology sector.</li>
+                        <li>Mapped and implemented security controls against <strong>ISO 27001</strong> and
+                            <strong>PCI DSS</strong> frameworks, closing <strong>100%</strong> of critical gaps
+                            identified during the initial assessment.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Governance, Training & Awareness:</strong>
+                    <ul>
+                        <li>Developed and delivered <strong>Security Awareness Training</strong> programs for technical
+                            and non-technical staff, covering data handling, phishing prevention, and regulatory
+                            obligations under LGPD/GDPR.</li>
+                        <li>Created security governance documentation including policies, procedures, and
+                            <strong>risk assessment matrices</strong> aligned with ISO 27001 Annex A controls.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Hands-On Technical Implementation:</strong>
+                    <ul>
+                        <li><strong>Infrastructure Hardening:</strong> Configured and hardened servers, deployed
+                            security tools, and implemented network segmentation to meet compliance requirements.</li>
+                        <li><strong>Security Controls Deployment:</strong> Implemented both technical controls
+                            (firewalls, encryption, access control) and administrative controls (change management,
+                            incident response procedures) across the environment.</li>
+                    </ul>
+                </li>
+                <li><strong>Data Protection & Privacy Consultancy:</strong> Served as the primary <strong>DPO
+                        advisor</strong>, ensuring alignment with LGPD/GDPR principles and advising on data
+                    classification, retention policies, and subject access requests.</li>
+                <li><strong>SIEM Implementation:</strong> Implemented and tuned <strong>Splunk</strong> for centralized
+                    log analysis and threat detection, reducing mean-time-to-detect (MTTD) for security events.</li>
+                <li><strong>Vulnerability Assessment:</strong> Conducted vulnerability assessments on web applications
+                    following <strong>OWASP Top 10</strong> methodology, delivering detailed remediation reports to
+                    the development team.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">NDPA – Associação Nacional dos Profissionais de Privacidade de
+                        Dados</span>
+                    <span class="job-location">| New York, NY</span>
+                    <div class="job-title">Member & Data Privacy Researcher</div>
+                </div>
+                <div class="job-date">12/2019 – Present</div>
+            </div>
+            <ul>
+                <li><strong>Pioneer Cohort:</strong> Member of Brazil's <strong>first nationally certified
+                        class</strong> of professionals trained and qualified to work with Data Protection and Privacy
+                    (LGPD/GDPR). This exclusive group represents a select number of specialists recognized by the
+                    national association for their expertise in the field.</li>
+                <li><strong>Research & Advocacy:</strong> Active participant in research groups focused on evolving data
+                    privacy regulations, contributing to the development of best practices and practical guidance for
+                    organizations navigating LGPD compliance.</li>
+                <li><strong>Professional Network:</strong> Part of a curated community of privacy professionals,
+                    enabling continuous knowledge exchange on emerging privacy risks, regulatory updates, and
+                    cross-industry implementation strategies.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Regional Tech Providers</span> <span class="job-location">| New York, NY</span>
+                    <div class="job-title">IT Supervisor | Information Security & Infrastructure Lead</div>
+                </div>
+                <div class="job-date">09/2019 – 04/2020</div>
+            </div>
+            <ul>
+                <li><strong>IT Leadership & Operations:</strong> Supervised the entire technology department, managing
+                    internal infrastructure, specialized technical support, and strategic technology initiatives.
+                    Served as the sole technical authority for all IT operations.</li>
+                <li><strong>Infrastructure Management:</strong>
+                    <ul>
+                        <li>Managed complete IT infrastructure including <strong>Windows Server</strong>,
+                            <strong>Linux</strong> (Debian, Ubuntu), network equipment (switches, firewalls, access
+                            points), and end-user computing.
+                        </li>
+                        <li>Administered <strong>Active Directory</strong>, DNS, DHCP, and Group Policy across the
+                            enterprise, ensuring high availability and performance.</li>
+                        <li>Led the <strong>AWS cloud migration</strong> initiative, deploying and managing EC2, S3,
+                            and RDS instances for development and production environments.</li>
+                    </ul>
+                </li>
+                <li><strong>Ransomware Incident Response (Critical Event):</strong>
+                    <ul>
+                        <li>Led the response to a critical <strong>ransomware attack</strong> that compromised the
+                            corporate network. Executed containment, eradication, and full network recovery within
+                            <strong>60 minutes</strong>, minimizing data loss and business disruption.
+                        </li>
+                        <li>Post-incident, redesigned backup strategies and implemented segmentation controls to
+                            prevent recurrence, strengthening the company's overall security posture.</li>
+                    </ul>
+                </li>
+                <li><strong>Information Security Governance (ISO 27001/LGPD):</strong>
+                    <ul>
+                        <li><strong>Security & Privacy by Design:</strong> Architected and enforced security policies
+                            and privacy standards from the ground up, ensuring all new systems and processes were
+                            compliant with <strong>ISO 27001</strong> (ISMS) and <strong>LGPD</strong> regulations.</li>
+                        <li><strong>Risk Management (ISO 27005):</strong> Established a structured risk management
+                            program, identifying assets, threats, and vulnerabilities, and implementing controls to
+                            mitigate acceptable risk levels.</li>
+                        <li><strong>Training & Awareness:</strong> Developed and delivered comprehensive security
+                            awareness programs for staff, fostering a culture of cybersecurity and data protection.</li>
+                        <li><strong>Vulnerability Management:</strong> Conducted penetration testing (pentesting) and
+                            vulnerability scans to assess and remediate system risks.</li>
+                        <li><strong>Disaster Recovery:</strong> Designed and implemented disaster recovery plans and
+                            backup strategies to ensure business continuity.</li>
+                    </ul>
+                </li>
+                <li><strong>Embedded Systems & Custom Development:</strong>
+                    <ul>
+                        <li><strong>Printer Fleet Embedded Software:</strong> Designed and developed embedded monitoring
+                            and management systems for the industrial printer fleet using <strong>Ruby</strong>,
+                            <strong>Python</strong>, and <strong>C++</strong>, integrating with XML-based protocols for
+                            real-time status tracking and automated alerting.
+                        </li>
+                        <li><strong>Dashboard Development:</strong> Built custom monitoring dashboards for fleet
+                            visibility using <strong>Python</strong>, <strong>Ruby</strong>, and
+                            <strong>PHP</strong>.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Innovation & R&D:</strong>
+                    <ul>
+                        <li><strong>GED Implementation (Electronic Document Management):</strong> Led the design and
+                            development of a proprietary document management system integrating
+                            <strong>Alfresco</strong>, <strong>Python</strong>, <strong>JavaScript</strong>, and
+                            <strong>OCR</strong> technology.
+                        </li>
+                        <li>Responsible for researching and implementing new technologies to drive operational
+                            efficiency.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">National Tech Academy</span> <span class="job-location">| New York, NY</span>
+                    <div class="job-title">Technical Instructor | Professor</div>
+                </div>
+                <div class="job-date">06/2016 – 12/2016</div>
+            </div>
+            <ul>
+                <li><strong>Technical Education & Training:</strong> Delivered comprehensive technical training courses
+                    to students and professionals, bridging the gap between theoretical knowledge and practical
+                    application.</li>
+                <li><strong>Course Curriculum:</strong>
+                    <ul>
+                        <li><strong>PHP Development:</strong> Taught web development fundamentals, server-side
+                            scripting, database integration, and secure coding practices.</li>
+                        <li><strong>Virtualization Technologies:</strong> Instructed on virtual machine deployment,
+                            hypervisor management, and infrastructure virtualization concepts.</li>
+                        <li><strong>Introduction to Information Security:</strong> Introduced core security principles,
+                            threat landscape awareness, and foundational security controls.</li>
+                    </ul>
+                </li>
+                <li><strong>Knowledge Transfer:</strong> Developed course materials, practical exercises, and hands-on
+                    labs to ensure effective learning outcomes.</li>
+                <li><strong>Mentorship:</strong> Guided students in developing technical skills and understanding
+                    real-world IT challenges.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">FREELANCE & ENTERPRISE CONSULTING</span> <span class="job-location">|
+                        Remote</span>
+                    <div class="job-title">Vulnerability Researcher & Bug Bounty Hunter</div>
+                </div>
+                <div class="job-date">01/2012 – Present</div>
+            </div>
+            <ul>
+                <li><strong>Proactive Threat Discovery:</strong> Actively engage in vulnerability research and bug
+                    bounty programs across global platforms including <strong>HackerOne</strong> and
+                    <strong>Bugcrowd</strong>, identifying critical security flaws before they can be exploited by
+                    malicious actors.
+                </li>
+                <li><strong>Responsible Disclosure & Reporting:</strong> Conduct deep technical analysis of web
+                    applications, APIs, and infrastructure to discover vulnerabilities (e.g., OWASP Top 10, business
+                    logic flaws). Author comprehensive, reproducible security reports that assist enterprise engineering
+                    teams in rapid remediation.</li>
+                <li><strong>Continuous Security Evolution:</strong> Maintain a cutting-edge understanding of novel
+                    exploit techniques and adversarial methodologies through continuous, hands-on offensive security
+                    testing against hardened corporate environments.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">FOUNDATIONAL EXPERIENCE & ENTREPRENEURSHIP</span> <span
+                        class="job-location">|
+                        Tech Solutions Owner & Consultant</span>
+                    <div class="job-title">Full Stack Developer | Infrastructure Architect | Security Specialist</div>
+                </div>
+                <div class="job-date">2005 – 2019</div>
+            </div>
+            <ul>
+                <li><strong>IT Infrastructure & Networking (Hands-On):</strong>
+                    <ul>
+                        <li><strong>Server Administration:</strong> Extensive field experience deploying, hardening, and
+                            managing <strong>Windows Server</strong> (2003–2019) and <strong>Linux</strong> (Debian,
+                            CentOS, Ubuntu) environments for B2B (CNPJ) clients across multiple industries. Full
+                            responsibility for OS installation, Active Directory, DNS, DHCP, file shares, and print
+                            services.</li>
+                        <li><strong>Virtualization & Datacenter:</strong> Configured and managed <strong>virtual
+                                machines on dedicated servers</strong> at <strong>Global Cloud Provider</strong> and other
+                            US-based datacenters, with a strong focus on security hardening (iptables, fail2ban, SSH
+                            key-only access). Deployed high-performance VPS for gaming, web hosting, and application
+                            servers with <strong>99.9% uptime SLAs</strong>.</li>
+                        <li><strong>Network Engineering:</strong> Deep understanding of TCP/IP, DNS, DHCP, structured
+                            cabling, fiber optics, and secure wireless networks. Designed and managed complex routing,
+                            VLAN segmentation, and VPN connectivity solutions for multi-site clients.</li>
+                        <li><strong>Cloud & Hosting:</strong> Early adoption of cloud providers (<strong>AWS, Google
+                                Cloud, Azure, Global Cloud Provider</strong>) applying
+                            <strong>Security-by-Default</strong> principles to mitigate DDoS attacks and unauthorized
+                            access.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>B2B Client Services (CNPJ):</strong>
+                    <ul>
+                        <li><strong>Full-Service IT Provider:</strong> Served as the outsourced IT department for
+                            multiple small and medium businesses, providing end-to-end <strong>infrastructure
+                                management, cybersecurity consulting, and custom software development</strong>.</li>
+                        <li><strong>Client Retention:</strong> Built long-term relationships with corporate clients
+                            through reliable service delivery, proactive maintenance, and strategic technology
+                            advisory.</li>
+                    </ul>
+                </li>
+                <li><strong>Software Development Ecosystem (Polyglot):</strong>
+                    <ul>
+                        <li><strong>Web Systems:</strong> End-to-end development of dynamic websites and portals using
+                            PHP, CSS, HTML5, and SQL databases.</li>
+                        <li><strong>Application Engineering:</strong> Built custom desktop and backend software
+                            solutions utilizing a broad spectrum of languages including <strong>C++, C#, Java, Perl,
+                                Delphi, Kotlin, and Python</strong>.</li>
+                        <li><strong>ERP & Database:</strong> Customization of ERP systems and database administration to
+                            align technology with specific business processes.</li>
+                    </ul>
+                </li>
+                <li><strong>Security & Operations:</strong>
+                    <ul>
+                        <li><strong>Consultancy:</strong> Provided specialized Information Security consultancy,
+                            hardening infrastructures and establishing best practices for data protection long before it
+                            became a standard compliance requirement.</li>
+                        <li><strong>Support Leadership:</strong> Managed helpdesk operations, hardware maintenance, and
+                            user training, developing deep empathy for user needs and operational challenges.</li>
+                    </ul>
+                </li>
+                <li><i>This 14-year period of diverse, intense technical immersion laid the groundwork for advanced
+                        expertise in Cybersecurity, providing a unique ability to secure systems by understanding
+                        exactly how they are built, networked, and maintained at the foundational level.</i></li>
+            </ul>
+        </div>
+
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Project Portfolio (Detailed)</h2>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Project Nexus™ AI: Industrial GenAI & RAG Platform</span>
+                    <div class="job-title">Lead Architect & Developer</div>
+                </div>
+                <div class="job-date">10/2025 - Present</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Architected and developed a cutting-edge Generative AI
+                platform designed to democratize access to critical industrial data. The system acts as an intelligent
+                bridge between shop-floor operators and complex historian databases, leveraging LLMs to reduce
+                troubleshooting time and enhance decision-making.</p>
+            <ul>
+                <li><strong>Text-to-SQL Engine:</strong> Engineered a specialized NLP pipeline using LangChain that
+                    translates natural language (PT-BR/EN) into optimized, timezone-aware SQL queries, enabling
+                    real-time analysis of vibration, temperature, and pressure across 10M+ historical records.</li>
+                <li><strong>RAG Architecture (Retrieval-Augmented Generation):</strong> Built a semantic search engine
+                    using ChromaDB and HuggingFace embeddings to index technical manuals and procedures, allowing the AI
+                    to provide context-aware operational support.</li>
+                <li><strong>Dynamic Strategy Routing:</strong> Implemented intelligent logic to dynamically select the
+                    best execution path (Direct SQL, Vector Search, or Agentic RAG) based on user intent.</li>
+                <li><strong>High-Performance API:</strong> Developed a robust FastAPI (Python 3.11) backend with async
+                    execution and specialized error handling, delivering complex query results in &lt;2 seconds.</li>
+                <li><strong>Tech Stack:</strong> Python, LangChain, OpenAI/Local LLMs, Pandas, MySQL (Time-series),
+                    ChromaDB, SQLAlchemy, React 18 (TypeScript), Vite, Docker, TailwindCSS.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Project Nexus Enterprise SCADA/MES Architecture – Global Brewery</span>
+                    <div class="job-title">Lead SCADA Architect & OT/IT Integrator</div>
+                </div>
+                <div class="job-date">10/2024 - Present</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Spearheaded the architectural overhaul and optimization of
+                a mission-critical SCADA/MES system for one of the world's largest breweries. The project focused on
+                eliminating data bottlenecks in a high-speed production environment and unifying the OT/IT stack.</p>
+            <ul>
+                <li><strong>Database Performance Optimization:</strong> Re-architected the data layer by implementing a
+                    High-Availability (HA) MS SQL Server cluster with failover replication. Refactored complex T-SQL
+                    Stored Procedures (OEE, Availability), successfully reducing report generation latency from minutes
+                    to seconds.</li>
+                <li><strong>OT/IT Convergence Leadership:</strong> Served as the primary technical bridge between
+                    Automation (OT) and IT teams, translating business requirements into secure technical solutions and
+                    ensuring reliable IIoT integration (OPC-UA, MQTT) from PLCs to the central MES.</li>
+                <li><strong>Advanced Ignition Development:</strong> Developed standardized, high-performance HMIs in
+                    Ignition 8.1 and utilized advanced Python (Jython) scripting to consolidate real-time production,
+                    efficiency, and quality data into strategic executive dashboards.</li>
+                <li><strong>Resilience:</strong> Delivered a robust, 24/7 operational ecosystem that ensured data
+                    integrity and zero downtime for critical reporting systems.</li>
+                <li><strong>Tech Stack:</strong> Inductive Automation Ignition 8.1 (Vision/Perspective), MS SQL Server
+                    (HA), T-SQL, Python (Jython), OPC-UA, MQTT, IIoT.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Enterprise Security Governance & Compliance Initiative</span>
+                    <div class="job-title">Security Compliance Lead & Technical Focal Point</div>
+                </div>
+                <div class="job-date">06/2021 - Present</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Led the end-to-end security compliance strategy for a
+                strategic client, focusing on rigorous adherence to Cloud Security Alliance (CSA) standards and privacy
+                regulations. Established the bridge between technical implementation and regulatory requirements.</p>
+            <ul>
+                <li><strong>CSA & CAIQ Governance:</strong> Orchestrated the answering, implementation, and successful
+                    completion of the CSA <strong>CAIQ v3</strong> and <strong>CAIQ v4</strong> assessments, along with
+                    comprehensive Cloud Controls Matrix (<strong>CCM</strong>) mapping. Successfully demonstrated
+                    adherence to rigorous
+                    security controls to secure critical business contracts.</li>
+                <li><strong>Technical Translation:</strong> Acted as the primary liaison between Development and
+                    Compliance teams, translating complex regulatory requirements into actionable technical backlogs and
+                    ensuring controls were correctly implemented in the product architecture.</li>
+                <li><strong>Continuous Compliance Framework:</strong> Established a continuous governance workflow,
+                    serving as the Technical Focal Point alongside the DPO (Data Protection Officer). Responsible for
+                    maintaining the company's security posture against GDPR and managing vendor risk
+                    assessments/questionnaires.</li>
+                <li><strong>Frameworks & Skills:</strong> Cloud Security Alliance (CCM/CAIQ), GDPR, Security Control
+                    Mapping, Third-Party Risk Management (TPRM), Audit Preparation, ISO 27001.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Project Nexus™ – Automated ISMS & Cloud Security Platform (GRC)</span>
+                    <div class="job-title">Lead Architect & Full-Stack Developer</div>
+                </div>
+                <div class="job-date">06/2025 - 11/2025</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Designed and developed a proprietary GRC (Governance, Risk,
+                and Compliance) platform to replace manual spreadsheets with real-time automation. The system bridges
+                the gap between ISO 27001 requirements and dynamic cloud infrastructure, providing continuous visibility
+                into security posture.</p>
+            <ul>
+                <li><strong>Automated Compliance & AWS Integration:</strong> Built a native integration engine using AWS
+                    SDK to automatically inventory assets (EC2, S3, RDS, IAM) and monitor 15+ types of security
+                    deviations in real-time, eliminating blind spots in the cloud environment.</li>
+                <li><strong>Measurable Impact:</strong> Achieved a 90% reduction in deviation detection time and enabled
+                    80% faster audits by automating evidence collection and report generation.</li>
+                <li><strong>Full-Stack Architecture:</strong> Engineered a scalable microservices-ready architecture
+                    using Node.js/TypeScript (Backend) and React/Tailwind (Frontend), ensuring cross-platform
+                    compatibility and high performance.</li>
+                <li><strong>Risk Management:</strong> Implemented a digitalized workflow for risk assessment and
+                    vulnerability tracking, ensuring full traceability and continuous alignment with ISO/IEC 27001
+                    controls.</li>
+                <li><strong>Tech Stack:</strong> TypeScript, Node.js, Express, Prisma ORM, PostgreSQL, Redis, React,
+                    Vite, Tailwind CSS, AWS SDK, Docker, Nginx.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Project Nexus - Enterprise AWS Cloud Optimization & FinOps Initiative</span>
+                    <div class="job-title">Cloud Architect & FinOps Lead</div>
+                </div>
+                <div class="job-date">12/2021 - 12/2021</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Led a strategic infrastructure overhaul focused on
+                operational efficiency and cost governance. Transformed the company's cloud footprint by aligning
+                resource capacity with actual business demand, establishing a sustainable foundation for future growth.
+            </p>
+            <ul>
+                <li><strong>Massive Cost Reduction:</strong> Achieved a sustained >60% reduction in monthly AWS costs
+                    through aggressive rightsizing, storage optimization (EBS/S3), and elimination of waste, directly
+                    freeing up budget for new R&D initiatives.</li>
+                <li><strong>Automated Governance:</strong> Designed and deployed serverless automation using AWS Lambda
+                    and CloudWatch to auto-shutdown idle non-production resources, ensuring "zero waste" operations
+                    outside business hours.</li>
+                <li><strong>Strategic Procurement:</strong> Re-architected the purchasing strategy by implementing a
+                    hybrid model of Reserved Instances for steady workloads and Spot Instances for fault-tolerant tasks.
+                </li>
+                <li><strong>Visibility & Control:</strong> Established strict cost governance protocols including
+                    granular Resource Tagging, chargeback reporting, and IAM access controls to prevent shadow IT and
+                    budget overruns.</li>
+                <li><strong>Tech Stack:</strong> AWS (EC2, RDS, S3, EBS, ELB), AWS Lambda (Python), CloudWatch Events,
+                    FinOps.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Certifications</h2>
+        <ul class="certifications-list">
+            <li><strong>CISSP</strong> - Certified Information Systems Security Professional <span
+                    class="in-progress">(In Progress)</span></li>
+            <li><strong>SSCP</strong> - Systems Security Certified Practitioner - (ISC)²</li>
+            <li><strong>CC</strong> - Certified in Cybersecurity - (ISC)²</li>
+            <li><strong>ISO 27001:2022 Lead Implementer</strong></li>
+            <li><strong>DPO</strong> - Certified Data Protection Officer (GDPR, LGPD, ISO)</li>
+            <li><strong>AWS Certified Cloud Practitioner</strong></li>
+            <li><strong>LGPD</strong> - Lei Geral de Proteção de Dados (Certified Specialist)</li>
+            <li><strong>GDPR</strong> - General Data Protection Regulation (Certified Specialist)</li>
+            <li><strong>ISO 27005</strong> - Information Security Risk Management</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Education</h2>
+        <div class="education-item">
+            <span><strong>Postgraduate</strong> in Ethical Hacking and Cybersecurity</span>
+            <span>2022</span>
+        </div>
+        <div class="education-item">
+            <span><strong>Bachelor's Degree</strong> in Systems Analysis and Development</span>
+            <span>2016</span>
+        </div>
+    </section>
+</body>
+
+</html>

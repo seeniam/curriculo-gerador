@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Base Mestre - João Silva</title>
+    <style>
+        :root {
+            --primary-color: #0f2b4e;
+            --accent-color: #2c5aa0;
+            --text-color: #333;
+            --light-text: #666;
+            --bg-color: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: var(--text-color);
+            background: var(--bg-color);
+            width: 210mm;
+            margin: 0 auto;
+            padding: 10mm 15mm;
+            background-color: white;
+            text-align: justify;
+        }
+
+        .header {
+            background-color: transparent;
+            color: var(--text-color);
+            padding: 0 0 15px 0;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 5px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .header h1 {
+            font-size: 24pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        .header-title {
+            font-size: 11pt;
+            color: var(--accent-color);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            font-size: 9.3pt;
+            margin-top: 5px;
+        }
+
+        .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .section {
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .competency-item {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            font-size: 9.5pt;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .competency-label {
+            font-weight: 700;
+            color: var(--primary-color);
+            min-width: 170px;
+            flex-shrink: 0;
+            font-size: 9pt;
+        }
+
+        .job {
+            margin-bottom: 15px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 3px;
+        }
+
+        .job-company {
+            font-weight: 700;
+            font-size: 10.5pt;
+            color: #222;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            font-size: 10pt;
+            font-style: italic;
+        }
+
+        .job-date {
+            font-size: 9pt;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .job ul {
+            margin-left: 20px;
+            margin-top: 3px;
+        }
+
+        .job li {
+            margin-bottom: 2px;
+            color: #444;
+            font-size: 9.3pt;
+        }
+
+        .certifications-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 20px;
+            row-gap: 4px;
+        }
+
+        .certifications-list li {
+            list-style: none;
+            padding-left: 15px;
+            position: relative;
+            font-size: 9.5pt;
+        }
+
+        .certifications-list li::before {
+            content: "▪";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 12px;
+        }
+
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 9.5pt;
+        }
+
+        @media print {
+            @page {
+                margin: 15mm;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1>João Silva</h1>
+        <div class="header-title">Knowledge Base Mestre - +19 Anos de Excelência em TI & Segurança</div>
+        <div class="contact-info">
+            <a href="mailto:joaosilva@example.com">joaosilva@example.com</a>
+            <a href="tel:+5511999999999">+55 (11) 99999-9999</a>
+            <a href="https://joaosilva-portfolio.com.br">joaosilva-portfolio.com.br</a>
+            <a href="https://www.linkedin.com/in/joaosilva-983271649208">LinkedIn</a>
+        </div>
+    </header>
+
+    <section class="section">
+        <h2 class="section-title">Resumo Profissional</h2>
+        <p>
+            Profissional com 19 anos de histórico na indústria de TI, evoluindo do suporte "hands-on" e desenvolvimento
+            full-stack até o alto nível estratégico em <strong>Arquitetura de Segurança</strong> e
+            <strong>Governança</strong>. Este arquivo serve como a <strong>KNOWLEDGE BASE MESTRE</strong>, contendo uma
+            lista exaustiva de experiências em Desenvolvimento (DevOps), Infraestrutura e Defesa Cibernética. O conteúdo
+            deste arquivo deve ser selecionado e lapidado para demonstrar uma compreensão holística do ecossistema de
+            tecnologia, desde o cabeamento físico até a Segurança em Nuvem guiada por IA.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Competências Principais</h2>
+        <div class="competencies">
+            <div class="competency-item">
+                <span class="competency-label">Governança em Segurança (GRC)</span>
+                <span class="competency-content">Gestão da Segurança da Informação (<strong>ISO 27001</strong>), Gestão
+                    de Riscos (<strong>ISO 27005</strong>), Conformidade Regulatória (<strong>LGPD/GDPR</strong>),
+                    Privacy by Design, Programas de Treinamento de Conscientização.</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">Segurança Industrial (OT/ICS)</span>
+                <span class="competency-content">Defesa de Arquitetura Híbrida OT/IT, <strong>Ignition SCADA</strong>
+                    (Vision/Perspective), Protocolos IIoT (MQTT, OPC-UA), Segmentação de Rede, Proteção de Ativos
+                    Industriais.</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">Segurança em Nuvem & Infraestrutura</span>
+                <span class="competency-content"><strong>AWS Security</strong> (IAM, GuardDuty, Macie, KMS, WAF),
+                    Infraestrutura como Código (Terraform), Segurança em Contêineres (Docker), FinOps, Hardening de
+                    Servidores (Linux/Windows).</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">SecOps & Resposta a Incidentes</span>
+                <span class="competency-content">Implementação de SIEM (Splunk, Wazuh), Threat Hunting, Gestão de
+                    Vulnerabilidades (Pentest), <strong>Resposta a Incidentes</strong> (Contenção de Ransomware),
+                    Proteção de Endpoint (EDR/XDR).</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">DevSecOps & Automação</span>
+                <span class="competency-content">Scripting em <strong>Python/Bash</strong> para Automação de Segurança,
+                    SDLC Seguro, Integração de Pipeline CI/CD, Implementação de WAF, Segurança de APIs.</span>
+            </div>
+            <div class="competency-item">
+                <span class="competency-label">Integração de Dados & IA</span>
+                <span class="competency-content">Arquiteturas de IA Generativa (<strong>LLM/RAG</strong>), Motores
+                    Text-to-SQL, Machine Learning (Análise Preditiva), Engenharia de Dados (SQL/NoSQL).</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Experiência Profissional</h2>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Soluções Globais Tech</span> <span class="job-location">| Araxá -
+                        Remoto</span>
+                    <div class="job-title">Analista de Sistemas e Arquiteto de Cibersegurança</div>
+                </div>
+                <div class="job-date">06/2021 – Presente</div>
+            </div>
+            <p style="margin-bottom: 6px; font-size: 9.5pt;"><strong>Competências-Chave:</strong> Cibersegurança
+                Industrial (OT/IT), SCADA Ignition (Vision/Perspective), Soluções em IA (LLM/RAG), Arquitetura
+                Cloud-Native, Proteção de Dados & Privacidade.</p>
+            <ul>
+                <li><strong>🛡️ Estratégia de Segurança da Informação & Cibersegurança:</strong>
+                    <ul>
+                        <li><strong>Arquitetura & Execução:</strong> Arquiteto líder de segurança para o projeto Soluções Globais
+                            Project Nexus™, desenvolvendo estratégias de defesa robustas para infraestruturas híbridas
+                            (On-Premises e Cloud-Native).</li>
+                        <li><strong>Compliance & Governança:</strong> Implementou e gerenciou avaliações de risco e
+                            controles rígidos de segurança fortemente baseados nos frameworks <strong>ISO/IEC
+                                27001</strong>, <strong>ISO 27005</strong> e <strong>NIST CSF</strong>, fortalecendo com
+                            sucesso o SGSI.</li>
+                        <li><strong>Cloud Security Alliance & DPO:</strong> Responsável por atender os requisitos da
+                            <strong>CSA</strong> (Cloud Security Alliance), gerenciando e executando questionários
+                            <strong>CAIQ v3</strong>, <strong>CAIQ v4</strong> e matrizes <strong>CCM</strong>. Atua
+                            como o <strong>DPO Técnico</strong> para a iniciativa <strong>Project Nexus™</strong>, garantindo
+                            alinhamento estrito com LGPD/GDPR.
+                        </li>
+                        <li><strong>Red & Blue Teaming:</strong> Adotou metodologia de segurança proativa integrando
+                            táticas ofensivas (com base no <strong>MITRE ATT&CK</strong> e <strong>OWASP</strong>) e
+                            estratégias defensivas para mitigar riscos de ativos industriais corporativos.</li>
+                    </ul>
+                </li>
+                <li><strong>🏭 Automação, Indústria 4.0 & Transformação Digital:</strong>
+                    <ul>
+                        <li><strong>Deploy Global de MES/SCADA:</strong> Liderou o desenvolvimento e a implantação de
+                            ponta a ponta para duas das maiores cervejarias do mundo, utilizando o ecossistema
+                            <strong>Inductive Automation Ignition</strong> completo.
+                        </li>
+                        <li><strong>Desenvolvimento Full-Stack SCADA:</strong> Responsável por todos os aspectos de
+                            desenvolvimento de telas industriais e lógicas operacionais em <strong>Python
+                                (Jython)</strong>, <strong>Kotlin</strong> e <strong>JavaScript</strong>.</li>
+                        <li><strong>Engenharia de Dados de Alta Performance:</strong> Arquiteto de bancos de dados de
+                            alta disponibilidade conectando sistemas <strong>SQL</strong> (PostgreSQL, MS SQL) e
+                            <strong>NoSQL</strong> (InfluxDB) de forma resiliente para métricas essenciais de manufatura
+                            (OEE).
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>🤖 Inovação em IA & Análise Preditiva:</strong>
+                    <ul>
+                        <li><strong>Machine Learning:</strong> Implementação de fluxos <strong>ML</strong> (Pandas,
+                            Scikit-learn, TensorFlow) viabilizando a manutenção preditiva e redução drástica no tempo de
+                            inatividade das linhas industriais.</li>
+                        <li><strong>Arquitetura GenAI & RAG:</strong> Pioneiro no desenvolvimento de assistentes
+                            virtuais industriais via <strong>LLM (Large Language Models)</strong> operando sob
+                            <strong>arquitetura RAG</strong> sustentada pelo Redis, municiando engenheiros e operadores
+                            com insights e diagnósticos sob medida.
+                        </li>
+                    </ul>
+                </li>
+                <li><strong>Arquitetura AWS & Cloud Management:</strong> Gestor técnico (hands-on) em toda a malha de
+                    ecossistema em nuvem da companhia via Infraestrutura como Código. Provisionamento avançado via
+                    <strong>Terraform (IaC)</strong> administrando cargas de trabalho Serverless (<strong>AWS
+                        Lambda</strong>), conectividade de chão de fábrica (<strong>AWS IoT Core</strong>), storage e
+                    orquestração de <strong>Contêineres</strong>.
+                </li>
+                <li><strong>BI & Data Analytics (QuickSight):</strong> Desenho arquitetônico e entrega de painéis
+                    analíticos utilizando o <strong>AWS QuickSight</strong> fortemente pareados com bancos de dados
+                    <strong>RDS</strong> e infraestrutura implantada puramente com templates CloudFormation/IaC.
+                </li>
+                <li><strong>Redes Avançadas & Diagnóstico OT:</strong> Fortíssima expertise a nível de tráfego de redes
+                    industriais, executando inspeções profundas (Deep Packet Inspection) via <strong>Wireshark</strong>
+                    e ferramentas cirúrgicas como <strong>Grassmarlin</strong>. Total propriedade sobre a topologia das
+                    nuvens <strong>AWS</strong> (VPCs, Subnets, Tabelas de Roteamento, NATs, gateways seguros).</li>
+                <li><strong>SIEM & Observabilidade:</strong> Arquiteto operacional na criação de ambientes robustos de
+                    monitoramento, incluindo os ecossistemas <strong>Wazuh</strong>, <strong>Elasticsearch e
+                        Graylog</strong>. Concepção e implantação de pilhas analíticas completas para disponibilidade
+                    usando <strong>Grafana</strong> e <strong>Zabbix</strong>.</li>
+                <li><strong>Automação & DevSecOps:</strong> Criação sistêmica de rotinas <strong>Python</strong> e Bash
+                    para blindar esteiras de entrega contínua (CI/CD Pipelines), reforçando detecção de anomalias sem
+                    atrito com desenvolvimento contínuo (Secure SDLC).</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Serviços de TI Enterprise</span> <span class="job-location">| Brasil</span>
+                    <div class="job-title">Engenheiro de Suporte Especializado (Field Service)</div>
+                </div>
+                <div class="job-date">12/2020 – 05/2021</div>
+            </div>
+            <ul>
+                <li><strong>Operações Corporativas em Campo:</strong> Agiu no suporte técnico vital em sites
+                    diversificados (instituições bancárias, saúde, redes de varejo) de grande renome nacional, exercendo
+                    função de primeira escalada técnica de incidentes em complexas redes de ponta. Manteve consistente
+                    índice de resolução no primeiro contato (First-Call Resolution) superior a <strong>95%</strong>.
+                </li>
+                <li><strong>Administração Sistêmica (Windows/Linux):</strong>
+                    <ul>
+                        <li>Expertise administrativa contundente de <strong>Windows Server</strong> (Active Directory,
+                            DNS, DHCP, Servidores de Arquivos/Impressão) e servidores em <strong>Linux</strong>
+                            (Debian). Cuidou cirurgicamente do patch management (WSUS) preventivo de segurança e
+                            otimização geral de ambientes hospedeiros.</li>
+                        <li>Mantenedor constante de regras em borda gerenciando firewalls granulares e criando robustos
+                            túneis VPN.</li>
+                    </ul>
+                </li>
+                <li><strong>Proteção de Endpoint (MDR / EDR):</strong> Implementou, monitorou ativamente as políticas
+                    globais e configurou os pacotes do <strong>Kaspersky Endpoint Security</strong> e <strong>Microsoft
+                        Defender for Endpoint</strong> para ambientes vastos, reforçando controles de restrição e
+                    implantação de hard-drives criptografados corporativos (BitLocker) focado em DLP.</li>
+                <li><strong>Gestão Estratégica via ITIL:</strong> Consolidou o ciclo de resoluções pautado pela
+                    governança pura através de metodologias no <strong>ServiceNow</strong> operando SLAs complexos de
+                    incidentes severos, ajudando ativamente no registro contínuo na base de conhecimentos que diminuiu
+                    ativamente em <strong>20%</strong> solicitações de apoio de primeiro nível.</li>
+                <li><strong>Implantação Centralizada de Imagens Corporativas (SCCM/MDT):</strong> Formação automatizada
+                    da trilha de instalação limpa massiva e SOE unificados assegurando rápida resiliência ao ambiente
+                    produtivo para centenas de estações locais vinculadas a rigorosos templates de padronização
+                    setorial.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Fintech Inovadora</span> <span class="job-location">| Brasil</span>
+                    <div class="job-title">Consultor de Data Protection & Segurança da Informação</div>
+                </div>
+                <div class="job-date">08/2020 – 11/2020</div>
+            </div>
+            <ul>
+                <li><strong>Conformidade Regulatória (BACEN e LGPD/PCI-DSS):</strong> Atuação pontual na modernização e
+                    implementação da infraestrutura bancolizada contra matrizes regulatórias rígidas encabeçadas pelos
+                    diretos normativos de segurança do <strong>Banco Central do Brasil</strong>. Elaborou com agilidade
+                    mapas processuais em sinergia a diretrizes do framework <strong>ISO 27001</strong> viabilizando
+                    fechamento de lacunas operacionais.</li>
+                <li><strong>Conscientização e Política Organizacional:</strong> Desenvolveu cartilhas focadas na gestão
+                    do tratamento da informação aplicáveis globalmente aos colaboradores diretos para mitigação
+                    aprofundada nos riscos e contornos a invasão/phishing orientadas diretamente frente ao enquadramento
+                    das normativas de proteção dos dados pessoais LGPD.</li>
+                <li><strong>Hardening Mão-na-Massa:</strong> Reconstruiu diretrizes restritivas blindando acessos
+                    através de complexos túneis em servidores da nuvem limitando áreas sensíveis isoladas de contato
+                    exterior, com refinadas ações contundentes pautadas e modelagens a favor do isolamento tático das
+                    redes.</li>
+                <li><strong>Observância via SIEM (Splunk):</strong> Implementou nativamente e fez ajustes sensíveis para
+                    orquestração da captação remota de fluxos de eventos analíticos permitindo identificação aprimorada
+                    no sistema, impulsionando rápida resposta preditiva à ameaças focadas pelo menor tempo de resolução.
+                </li>
+                <li><strong>Pentest & Vulnerabilidades:</strong> Identificação crítica sobre cenários potenciais atuando
+                    na varredura técnica sobre alvos apontados nos pilares metodológicos rigorosos preconizados
+                    globalmente pelo <strong>OWASP Top 10</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">APD – Associação Nacional dos Profissionais de Privacidade de
+                        Dados</span>
+                    <span class="job-location">| São Paulo, SP</span>
+                    <div class="job-title">Membro Pesquisador em Privacidade de Dados</div>
+                </div>
+                <div class="job-date">12/2019 – Presente</div>
+            </div>
+            <ul>
+                <li><strong>Membro Pioneiro (Turma 01):</strong> Parte do movimento estrutural das primeiras levas
+                    atuantes do sistema de qualificação do ecossistema formalizado globalmente sobre Proteção e
+                    Preservação de Sistemas à LGPD e diretivas na união europeia, atuando nas pautas abertas focado na
+                    propagação responsável ao contexto corporativo em relação às penalidades ou abordagens tecnológicas
+                    efetuadas de forma assertiva pelas companhias e integradores nacionais e consultivos na proteção
+                    processual sistêmica de compliance cibernético.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Provedores Regionais Tech</span> <span class="job-location">| São Paulo, SP</span>
+                    <div class="job-title">Supervisor de TI | Líder de Segurança e Infraestrutura</div>
+                </div>
+                <div class="job-date">09/2019 – 04/2020</div>
+            </div>
+            <ul>
+                <li><strong>Cadeira de Coordenação Tática:</strong> Respondeu pelas diretivas supremas das manobras
+                    relativas às arquiteturas locais da filial do mercado atuante e seus braços remotos em relação
+                    direta na condução orgânica unificada a soluções imediatas integrando desenvolvimento sistêmico ao
+                    back-end provedor, liderando processos fundamentais na orçamentação alinhadas.</li>
+                <li><strong>Forte Migração Multiclientes de Ambientes EC2:</strong> Alinhou recursos pesados migrando de
+                    instâncias físicas tradicionais encorpando soluções via provisões elásticas atrelada com eficiência
+                    frente as plataformas modernas baseadas massivamente através de domínios via AWS atrelada com
+                    robustez via espelhos resilientes com bancos Amazon S3 Cloud escalonáveis, unindo com primazia
+                    soluções internas baseadas puramente à arquitetura redundante sem perca massiva.</li>
+                <li><strong>Recuperação Iminente em Guerra Cibernética:</strong> Refez domínios inteiros paralisados via
+                    severo cripto-sequestro massivo de <strong>Ransomware</strong> contendo a ameaça total contra as
+                    portas sistêmicas com plena revogação isolando hosts em curtíssimo hiato restabelecendo total
+                    disponibilidade corporativa a plenos vapores restaurada em apenas sessenta (60) minutos operacionais
+                    isolando pontos vetores e reescrevendo totalmente políticas de filtragem a rede corporativa
+                    posterior e manualidade em playbooks robustecidos contra desastres imediatos operacionais
+                    massificados limitativos no chão empresarial afetado e interconectados de filiais com extrema
+                    presteza decisória ágil em prol da preservação de dados e sobrevivência operacional com altíssima
+                    pressão.</li>
+                <li><strong>Elaboração Completa à Integridade Processual - ISO:</strong> Fundamentação irrestrita
+                    baseadas formalmente alicerçada a integridade pontual pautado integralmente da criação à execução
+                    com as premissas em cima da adequação as documentações rígidas sob normatizações contínuas sobre
+                    governança corporativa no alicerce estrutural das exigências primárias documentadas de sistemas
+                    auditáveis e integrativas LGPD moldados a pilares processuais na blindagem organizacional proativa
+                    atrelado com capacitação técnica e forte treinamento focado nos processos de compliance de todos no
+                    quadro setorial geral.</li>
+                <li><strong>Dev Sistemas IoT/Impressão:</strong> Projetos contundentes unindo integrações lógicas
+                    baseando código C e integrações sob python amarrados às informações críticas telemétricas embarcadas
+                    captadoras de falhas vitais de status remotamente eficientíssimas baseando e alimentadas em
+                    front-end em PHP com fortes visibilidades a dashboard preditivo contra defeitos imediatos na rede
+                    preditiva no ecossistema local na automação orgânica central contínua baseadas em integração das
+                    arquiteturas internas dos provedores locais do mercado em evidência paralela e monitoramentos
+                    sistêmicos em geral focado também no deploy unificado OCR da organização atreladas sobre
+                    arquiteturas do Alfresco acoplados firmemente da raiz nativa.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Academia de Tecnologia</span> <span class="job-location">| São Paulo, SP</span>
+                    <div class="job-title">Instrutor Técnico | Professor</div>
+                </div>
+                <div class="job-date">06/2016 – 12/2016</div>
+            </div>
+            <ul>
+                <li><strong>Instrução Prática Avançada:</strong> Lecionou e ministrou laboratórios essenciais em
+                    programação pautados via módulos focados unindo bases fundamentais na construção lógica back-end
+                    nativa acopladas através diretas em sistemas baseadas ativamente nas camadas puras atreladas às
+                    estruturas do PHP construindo ambientes orientadas frente a programação com total alavancagem sobre
+                    as implementações arquiteturais sólidas sob virtualização local, instruindo módulos táticos
+                    essenciais voltando e moldando os alunos sobre fundações basilares operacionais baseadas
+                    incisivamente ao perímetro cibernético seguro em camadas defensivas.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">FREELANCE & CONSULTORIA ENTERPRISE</span> <span class="job-location">|
+                        Remoto</span>
+                    <div class="job-title">Pesquisador de Vulnerabilidades & Bug Bounty Hunter</div>
+                </div>
+                <div class="job-date">01/2012 – Presente</div>
+            </div>
+            <ul>
+                <li><strong>Descoberta Proativa de Ameaças:</strong> Engajamento contínuo em pesquisa de
+                    vulnerabilidades e programas de Bug Bounty em plataformas globais renomadas
+                    (<strong>HackerOne</strong> e <strong>Bugcrowd</strong>), identificando falhas críticas de
+                    infraestrutura e viabilizando presteza contra brechas que propiciam escaladas à agentes nocivos do
+                    cibercrime à gigantes corporativas globais.</li>
+                <li><strong>Identificação Responsável (Responsible Disclosure):</strong> Levantamento perito orientando
+                    tecnicamente e aprofundadas análises perimetrais exploradas nas bordas das aplicações web
+                    exponenciais de variados clientes relatados com detalhamento coeso em fluxos documentados detalhando
+                    provas-de-conceito de exploits em cima dos preceituais primórdios referenciados sob
+                    <strong>OWASP</strong> amparando robusta re-engenharia focado primariamente às supressões efetivas e
+                    resolutivas do core de desenvolvimento corporativo blindando com agilidade premissas fáceis ou
+                    complexos caminhos obscuros lógicos operacionais no topo.
+                </li>
+                <li><strong>Vanguarda e Conhecimento Orgânico Contínuo:</strong> A constante familiaridade do "modo
+                    ofensor" permitindo que através dessa manutenção e imersão perita constante em testes sobre alvos
+                    fortalecidos as compreensões e mapeamentos dos modismos agressivos cibernéticos sirvam como fomento
+                    tático ininterrupto permitindo fortes criações metodológicas reacionárias da malha protetiva interna
+                    onde a especialização diária fomenta grande valor contra ações externas constantes na evolução
+                    perigosa cibernética real com robustez diária operada em nuvens severas globais no modo raiz.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">EXPERIÊNCIA FUNDACIONAL E EMPREENDEDORISMO TÁTICO B2B</span> <span
+                        class="job-location">| Soluções Técnicas & Consultivo</span>
+                    <div class="job-title">Full Stack Developer | Arquiteto de Infraestrutura | Especialista em
+                        Automação</div>
+                </div>
+                <div class="job-date">2005 – 2019</div>
+            </div>
+            <ul>
+                <li><strong>As Mãos a Obra Tático da Redes (Raízes TI):</strong>
+                    <ul>
+                        <li><strong>Hardening e Core Administrativo:</strong> Execução total no braçal construindo
+                            arquiteturas locais com 100% nas fundações atreladas Windows (Server System do 2003 aos
+                            posteriores) até raízes pesadas operadas nativamente sob as distribuições Linux do Debian
+                            puro ou CentOS com imersões aprofundadas no controle geral AD corporativos gerindo os DNS
+                            internos integrados a roteamentos cabos, racks operando file-sharing sem restrições ou
+                            barreiras a resolvíveis premissas atrelados a inúmeros domínios ou nichos em vasta
+                            experiência operacional sem entrave prestativo resolutivas das dependentes na arquitetura
+                            base das companhias (CNPJ) conectando fios unificadas e blindados aos hubs ou infra com as
+                            manobras e entregáveis essenciais de cada infra na mesa do parceiro de negócios, atuando
+                            pericial contra dores físicas nas instâncias e suportes diários em total controle ativo as
+                            demandas em modo 24/7 ininterruptos por 10 anos pautado no campo tático das corporações e
+                            provedores variados na responsa de Dono (owner) irrestrito.</li>
+                        <li><strong>Bastiões Remotos nos Datacenters e Alojamento:</strong> Fornecendo e entregando
+                            máquinas e domínos potentes hospedados direto operando pesadamente via máquinas dedicadas
+                            com fortes gerências na malha do <strong>Provedor Global de Nuvem - Dallas US</strong>, entre
+                            fortes instâncias dedicadas providas, blindando regras ativas e pesadas sob root SSH
+                            restritas na camada host-firewall com Iptables rígidos contidas isoladas focado a ambientes
+                            hosteados provendo redes à bases multi-client focadas contra ataques distribuídos mitigando
+                            ddos atrelando os "Secure by default" raiz puros preceituais. Implementado também soluções
+                            AWS ou Google desde o berço das operativas provedoras das malhas globais.</li>
+                        <li><strong>Visão Sistêmica sobre Softwares Empresariais Multilíngue:</strong> Constante
+                            evolução nos projetos diários atreladas aos backends e modelagem nas base de dados das
+                            indústrias parceiras escrevendo do puro HTML ao peso C++ acoplando o melhor de ferramentas
+                            pautado a resolutivas com PHP no ecossistema e integrações massivas com Perl/Kotlin e as
+                            raízes puras modeladas no MySQL otimizados nas conexões nativas ou web das companhias
+                            assistidas unindo ERP's corporativos as integrações cruas das lógicas locais operacionais na
+                            automação fluida do caixa a contabilidade fiscal, entendendo visceral e de modo realístico
+                            sobre como bancos rodam nativamente operando, entendendo ou criando lógicas de banco
+                            operadas pesadas ou lógicas simples. Provendo realísticos painéis sem amarras na criativa
+                            automação do back-office unificados orientada ao objetivo final da performance sistêmica à
+                            rotina B2B no fluxo organizacional raiz perene dos atendimentos a clientes na região como
+                            uma Agência/TI única e abrangente ao mercado local ou remoto.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Portfólio de Projetos (Detalhado)</h2>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Project Nexus™ AI: GenAI Industrial & Plataforma RAG</span>
+                    <div class="job-title">Arquiteto Líder & Desenvolvedor Principal</div>
+                </div>
+                <div class="job-date">10/2025 - Presente</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Plataforma de IA com recursos voltados à indústria
+                concebendo elo entre histórico relacional produtivo e operadores, desenvolvida da base e visando reduzir
+                latências de análise das plantas produtivas via modelos LLM (IA).</p>
+            <ul>
+                <li><strong>Motor Base Text-To-SQL:</strong> Pipeline construído a base da biblioteca LangChain em que
+                    interpreta a entrada conversacional do usuário em português a transformando nas estruturas do SQL
+                    base nativa considerando as lógicas físicas atreladas na extração relacional via modelagem LLM
+                    pautadas sobre bancos robustos MySQL focando a rápida e efetiva recuperação informacional contra
+                    vibrações estruturais base contendo vastos +10 Milhões das tabelas com resolutiva em subsegundos
+                    pautados nativos sob as validações assíncronas orquestradas ativamente sob motor FastAPI no back-end
+                    provendo máxima otimização da inteligência.</li>
+                <li><strong>Integração via RAG Corporativo:</strong> Elaborada o embasamento semântico de vasta base em
+                    repositórios corporativos técnicos (Manuais, PDFs) efetuando cruzamentos e os gerando os
+                    sub-embeddings das premissas técnicas na integração contínua baseada sobre ecossistema vetorial
+                    (ChromaDB), devolvendo o contexto real às interpretações IA de assistência de forma isolada segura
+                    sob infra docker fechada orientada aos limites de contenção a vazamento contínuo em front React de
+                    performance operando via Vite e a interface visual moderna baseada no TailwindCS permitindo
+                    respostas assertivas atenuadas às rotinas da linha orgânica contínuas aos especialistas técnicos
+                    diários de forma segura baseando nos papéis de autenticidade criados no back ao IAM baseadas da
+                    operadora Cloud de borda do ecossistema principal.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">Project Nexus SCADA/MES Enterprise – Manufatura Cervejeira Global</span>
+                    <div class="job-title">Arquiteto de Integração SCADA/IT</div>
+                </div>
+                <div class="job-date">10/2024 - Presente</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Liderou tática do redesign ou repaginação completa focando
+                alta viabilidade arquitetural no back-end de apontamentos massivos provindos orgânicos do MES em
+                tempo-real em indústria alta-velocidade do ramo de cervejarias operando a transposição do OT para TI
+                corporativo em esteiras em nuvem.</p>
+            <ul>
+                <li><strong>Otimizações Pesadas (HA) do MS-SQL:</strong> Ajustes nativos críticos nos espelhamentos HA
+                    de grande capacidade a falhas na infra SQL refazendo views operacionais com complexidades
+                    Stored-Procedures nativas gerando a entrega veloz da volumetria massiva contínua nos OEE calculados
+                    do histórico a décimos-de-segundos orquestrados sob nuvem e on-premiss sem os antigos ruídos
+                    massificados operacionais reduzindo as requisições abruptas de performance pesada no core anterior
+                    sistêmico engessado corporativo.</li>
+                <li><strong>Liderança na Convergência (OPC-UA / MQTT) das Fronteiras Táticas Industriais:</strong>
+                    Arquiteto responsável da padronização e o orquestramento direto operacional nos links e dados desde
+                    os sensores e coletores automáticos dos chãos (PLC's) fluindo sob o protocolo de segurança
+                    industrial rumo os ambientes táticos operacionais do Ignition Inductive de borda gerando dashboard
+                    sob-medidos e scripts nativo em Jython nas esteiras unificadas entre rede Fabril/Corp corporativas
+                    interativas operadas em visores unificados e painéis executivos seguros isolados nas malhas
+                    produtivas táticas organizacionais ininterruptos no esquema 24/7 puros orgânicos da planta a AWS em
+                    tempo relacional real atrelado as seguranças inerentes requeridas a continuidade contínua fabril de
+                    nível internacional das companhias referências e exigentes da alta competitividade relativas aos
+                    nichos atuais exigentes de processos atrelados.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">ISMS & Compliance Program Corporativo Enterprise</span>
+                    <div class="job-title">Technical Focal Point & Líder Cloud de Conformidade</div>
+                </div>
+                <div class="job-date">06/2021 - Presente</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Articulação constante corporativa integrando as lideranças
+                no foco de alinhar os pesados projetos (Nuvens/SaaS/IaaS) ao balanço dos controles processuais
+                fundamentais atreladas sob normas severas à compliance e leis de privacidade exigíveis do B2B a
+                transposição operacionais aos quadros na ponta em campo do corpo de desenvolvimento na Soluções Globais/Project Nexus
+                global.</p>
+            <ul>
+                <li><strong>Cloud Security Alliance e Modelamento Governança Rígido de Avaliações Globais:</strong>
+                    Gestão processual, tática em apontamentos frente e orquestração efetiva e conclusiva preenchendo as
+                    premissas contínuas vitais relativas (CAIQ versões avançadas 3 ou 4) incluindo adoção da vasta grade
+                    (matrizes) baseadas nas requisições da CCM (Matriz de Controles). Transcreveu o normativo gerencial
+                    orientando os squads operatórios traduzindo as fomes normativas as ordens pontuais nas esteiras
+                    contínuas e nos templates táticos aos engenheiros cloud atrelados ao projeto em tempo-hábil
+                    satisfazendo rigorosidades extremas a gigantes internacionais referências unificando as blindagens
+                    em certificadas e prêmios e a constante reavaliação de parceiros sub-adjacentes e DPOs na Europa
+                    alinhado sob pilares processuais puros focados as Leis (LGPD ou GDPR) do processo ponta-a-ponta.
+                    Transpondo processos a um portal interno corporativo que em tempo-real averígua vulnerabilidades,
+                    inventaria instâncias ativas a luz dos apontamentos diários sobre descolamentos pautados ao ISMS
+                    matriz automatizando e diminuindo radical em 90% as latências e ruídos operacionais para reportar
+                    inconformidades baseadas em Node/React e painel administrativo cloud unificados nas varreduras via
+                    orquestração nativas aos pacotes AWS SDK e relatórios rápidos contínuos integradas no ambiente coeso
+                    orgânico em fluxos de DevOps e governança.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <div>
+                    <span class="job-company">FinOps Integrado Cloud & Reestruturação Orçamentária</span>
+                    <div class="job-title">Cloud Lead Architect FinOps</div>
+                </div>
+                <div class="job-date">12/2021 - 12/2021</div>
+            </div>
+            <p style="margin-bottom: 4px; font-size: 9.5pt;">Criação basilar dos ajustes operacionais focado ativamente
+                as diretivas no custo da organização eliminando os ruídos na subaproveitamento das frotas corporativas
+                hospedadas sob os domínios providos do escopo organizacional unindo automações severas à políticas da
+                engenharia de valores tangíveis e viáveis em alavancagem.</p>
+            <ul>
+                <li><strong>Drástica Retenção a Sobra Custo nas Instâncias Nuvens Corporativas Orçadas nas Exigências da
+                        Alta Gestão Executiva Organizadoras em Otimizações Rápidas Diárias Baseadas em Scriptings
+                        Puristas do SDK (Nativo na Malha AWS via Lambdas Programados no Gatilhos do CloudWatch na
+                        Desligamento Eficaz Focada Diretivas Unificando Spot e RI Acordos e Modelos Flexíveis Foco
+                        Mínimo Residual Impacto Financeiro):</strong> Operacionalizou orquestramentos e implementou
+                    tagueamentos minuciosos e estritos com restritividade organizacional (Grupos de Identidades AWS ou
+                    Subnets unificados rígidas no isolamentos para cobrança - ChargeBack Corp.) cortando agressivo e
+                    reduzindo mensalidade com saving de 60% e estipulando orçamentos para inovação em outras premissas
+                    alinhadas das diretorias das companhias em base contínua corporativo orgânica gerida no dashboard
+                    coeso das malhas puristas gerenciais contábeis do projeto sob escopo do engenheiro pautados focado a
+                    melhoria constante organizacional contínua operacional contínuo no controle AWS orquestrado de modo
+                    diário.</li>
+            </ul>
+        </div>
+
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Certificações Reconhecidas</h2>
+        <ul class="certifications-list">
+            <li><strong>CISSP</strong> - Certified Information Systems Security Professional <span
+                    class="in-progress">(Em Finalização)</span></li>
+            <li><strong>SSCP</strong> - Systems Security Certified Practitioner - (ISC)²</li>
+            <li><strong>CC</strong> - Certified in Cybersecurity - (ISC)²</li>
+            <li><strong>ISO 27001:2022 Lead Implementer</strong> - (ISMS Corporativo Global)</li>
+            <li><strong>DPO</strong> - Certified Data Protection Officer (GDPR, LGPD, Baseado ISO)</li>
+            <li><strong>AWS Certified Cloud Practitioner</strong> - (Engenharia Tática)</li>
+            <li><strong>LGPD</strong> - Certificação Especialista Lei Geral de Proteção (Brasil)</li>
+            <li><strong>GDPR</strong> - Certificação Especialista General Data Protection (EU)</li>
+            <li><strong>ISO 27005</strong> - Information Security Risk Management (Gestão Governamental Focada Fiel
+                Risco)</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Educação Pautada Tática Superior Curricular Corporativa Acadêmica</h2>
+        <div class="education-item">
+            <span><strong>Pós-Graduação Tática Lato-Sensu (Sênior)</strong> em Práticas de Ethical Hacking e Frameworks
+                Cybersecurity Integrados aos Ambientes Corporativos Modernos Organizados Institucionais Operacionais
+                Ciber Ofensivo-Defesas Operacionalizadas Globais.</span>
+            <span>2022</span>
+        </div>
+        <div class="education-item">
+            <span><strong>Formação Ensino Superior Completo Titulação (Universitária)</strong> do Nicho Base Corporativa
+                Focado Titulação de Reconhecimento Superior Focado - Bacharelado (Analista Sistema Tático Focado)
+                Orientado Construção Desenvolvedores Software Integrados Modernos ao Chão Processual do Código.</span>
+            <span>2016</span>
+        </div>
+    </section>
+</body>
+
+</html>
