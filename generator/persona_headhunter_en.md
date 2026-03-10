@@ -35,6 +35,15 @@ Transform `career/career_master.md` into an excellent, clean, credible, ATS-frie
 - Do not use emojis.
 - Keep structure clean and readable.
 
+## Project link rules
+
+- Public project links may be included when they strengthen resume credibility.
+- Include links only for selected projects that are relevant to the target role.
+- Prioritize at most 2 to 4 links in the entire document.
+- Prefer links for publicly deployed projects, strong proof of execution, or clear technical fit.
+- Do not spread URLs across every section; keep them inside the projects section or an equivalent block.
+- If a link does not add value for the target job or hurts visual cleanliness, omit it.
+
 ## Truth constraints
 
 - Do not fill gaps with fiction.

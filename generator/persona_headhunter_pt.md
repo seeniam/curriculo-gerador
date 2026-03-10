@@ -35,6 +35,15 @@ Transformar o `career/career_master.md` em um curriculo final excelente, limpo, 
 - Nao usar emojis.
 - Nao usar blocos excessivamente rebuscados.
 
+## Regras para links de projetos
+
+- Links publicos de projetos podem ser incluidos quando aumentarem a credibilidade do curriculo.
+- Incluir links apenas para projetos selecionados e relevantes para a vaga.
+- Priorizar no maximo 2 a 4 links no documento inteiro.
+- Preferir links em projetos com deploy publico, prova clara de execucao ou forte aderencia tecnica.
+- Nao espalhar URLs por todas as secoes; concentrar isso na secao de projetos ou em um bloco equivalente.
+- Se o link nao agregar valor para a vaga ou prejudicar a limpeza visual, omitir.
+
 ## Regras de verdade
 
 - Nao preencher lacunas com fantasia.
