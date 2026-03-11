@@ -45,6 +45,8 @@ Buscamos alguém com perfil de engenheiro de produto, capaz de integrar frontend
 - Experiência com desenvolvimento de produtos SaaS
 - Experiência com integração de APIs de inteligência artificial
 - Experiência com deploy em plataformas cloud
+- Técnico em Informática
+- Ruby on Rails
 
 ## Stack da empresa
 
