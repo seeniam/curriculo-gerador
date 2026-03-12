@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
+import shutil
+import subprocess
 import time
 import unicodedata
 from pathlib import Path
@@ -10,6 +13,11 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 
 from generator.io_utils import ensure_directory, find_job_files, find_latest_job_file, inline_css, read_text
+
+
+FORBIDDEN_PHRASES = (
+    "AI-Enabled Products",
+)
 
 
 def resolve_context(base_dir: Path) -> dict[str, Path]:
@@ -72,6 +80,7 @@ The source of truth is the Markdown career master. The HTML files in legacy are 
 ===== OUTPUT RULES =====
 1. Generate ONLY the final HTML.
 2. Do not include markdown fences.
+3. Never use markdown syntax inside the HTML, especially `**bold**`. Use `<strong>` instead.
 3. Keep the document ATS-friendly:
    - single column
    - semantic headings
@@ -85,6 +94,44 @@ The source of truth is the Markdown career master. The HTML files in legacy are 
 7. Preserve professional credibility and natural language.
 8. Ensure the final document is printable and clean.
 """
+
+
+def sanitize_html_output(html_output: str) -> str:
+    sanitized = (
+        html_output.replace("```html\n", "")
+        .replace("```html", "")
+        .replace("```", "")
+        .strip()
+    )
+    sanitized = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", sanitized, flags=re.DOTALL)
+
+    for phrase in FORBIDDEN_PHRASES:
+        sanitized = sanitized.replace(phrase, "")
+
+    sanitized = re.sub(r"\s+\|\s+\|", " |", sanitized)
+    sanitized = re.sub(r"\|\s*</", "</", sanitized)
+    sanitized = re.sub(r">\s*\|\s*", "> ", sanitized)
+    sanitized = re.sub(r"\(\s*\)", "", sanitized)
+    sanitized = re.sub(r"\s{2,}", " ", sanitized)
+    return sanitized
+
+
+def validate_html_output(html_output: str) -> list[str]:
+    warnings: list[str] = []
+
+    if "**" in html_output:
+        warnings.append("markdown bold syntax detected in HTML output")
+    if "```" in html_output:
+        warnings.append("markdown fence detected in HTML output")
+    if "<html" not in html_output.lower():
+        warnings.append("missing <html> tag in output")
+    if not html_output.lstrip().lower().startswith("<!doctype html>") and "<html" not in html_output[:200].lower():
+        warnings.append("output does not clearly start as an HTML document")
+    for phrase in FORBIDDEN_PHRASES:
+        if phrase in html_output:
+            warnings.append(f"forbidden phrase detected: {phrase}")
+
+    return warnings
 
 
 def slugify_filename_part(value: str) -> str:
@@ -114,13 +161,90 @@ def slugify_filename_part(value: str) -> str:
 
 def build_output_path(output_dir: Path, job_file: Path) -> Path:
     company_slug = slugify_filename_part(job_file.stem)
-    preferred_name = f"vaga-{company_slug}_neemias.html"
+    preferred_name = f"curriculo-{company_slug}_neemias.html"
     preferred_path = output_dir / preferred_name
     if not preferred_path.exists():
         return preferred_path
 
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    return output_dir / f"vaga-{company_slug}_neemias_{timestamp}.html"
+    return output_dir / f"curriculo-{company_slug}_neemias_{timestamp}.html"
+
+
+def build_pdf_output_path(html_output_path: Path) -> Path:
+    return html_output_path.with_suffix(".pdf")
+
+
+def find_browser_executable() -> str | None:
+    browser_candidates = (
+        "msedge",
+        "chrome",
+        r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+    )
+
+    for candidate in browser_candidates:
+        resolved = shutil.which(candidate) if "\\" not in candidate else candidate
+        if resolved and Path(resolved).exists():
+            return resolved
+
+    return None
+
+
+def export_html_to_pdf(html_output_path: Path) -> Path | None:
+    browser_executable = find_browser_executable()
+    if not browser_executable:
+        print("[!] PDF export skipped: Chrome/Edge executable not found.")
+        return None
+
+    pdf_output_path = build_pdf_output_path(html_output_path)
+    browser_profile_dir = html_output_path.parent / ".browser-profile"
+    ensure_directory(browser_profile_dir)
+    html_path_escaped = str(html_output_path.resolve()).replace("'", "''")
+    pdf_path_escaped = str(pdf_output_path.resolve()).replace("'", "''")
+    profile_path_escaped = str(browser_profile_dir.resolve()).replace("'", "''")
+    browser_path_escaped = browser_executable.replace("'", "''")
+    powershell_command = (
+        f"$html = Resolve-Path '{html_path_escaped}'; "
+        f"$pdf = '{pdf_path_escaped}'; "
+        f"$profile = '{profile_path_escaped}'; "
+        "New-Item -ItemType Directory -Force -Path $profile | Out-Null; "
+        f"& '{browser_path_escaped}' '--headless=new' '--disable-gpu' '--no-first-run' "
+        "'--disable-crash-reporter' '--disable-breakpad' '--no-default-browser-check' "
+        "\"--user-data-dir=$profile\" '--print-to-pdf-no-header' "
+        "\"--print-to-pdf=$pdf\" $html.Path"
+    )
+    command = [
+        "powershell",
+        "-Command",
+        powershell_command,
+    ]
+
+    try:
+        result = subprocess.run(
+            command,
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=45,
+        )
+    except OSError as exc:
+        print(f"[!] PDF export skipped: failed to start browser ({exc}).")
+        return None
+    except subprocess.TimeoutExpired:
+        print("[!] PDF export skipped: browser timed out while generating PDF.")
+        return None
+
+    if result.returncode != 0:
+        error_output = result.stderr.strip() or result.stdout.strip() or "unknown browser error"
+        print(f"[!] PDF export failed: {error_output}")
+        return None
+
+    if not pdf_output_path.exists():
+        print("[!] PDF export failed: browser finished without creating the PDF file.")
+        return None
+
+    return pdf_output_path
 
 
 def generate_for_job(
@@ -160,18 +284,19 @@ def generate_for_job(
         prompt,
         generation_config=genai.types.GenerationConfig(temperature=0.2),
     )
-    html_output = (
-        response.text.replace("```html\n", "")
-        .replace("```html", "")
-        .replace("```", "")
-        .strip()
-    )
+    html_output = sanitize_html_output(response.text)
+    warnings = validate_html_output(html_output)
 
     ensure_directory(context["output_dir"])
     output_path = build_output_path(context["output_dir"], job_file)
     output_path.write_text(html_output, encoding="utf-8")
 
     print(f"[+] Saved as: {output_path}")
+    pdf_output_path = export_html_to_pdf(output_path)
+    if pdf_output_path:
+        print(f"[+] PDF saved as: {pdf_output_path}")
+    for warning in warnings:
+        print(f"[!] Output warning for {job_file.name}: {warning}")
 
 
 def parse_args() -> argparse.Namespace:

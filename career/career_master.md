@@ -157,6 +157,9 @@ Ruby on Rails (manutenção e integração)
 APIs REST
 Spring Boot (projetos de estudo / aplicação prática)
 
+PHP (conhecimento bÃ¡sico)
+Laravel (projetos acadÃªmicos)
+
 Banco de dados
 
 PostgreSQL
@@ -215,6 +218,8 @@ Usei Docker para padronizar ambiente local e execução de serviços.
 
 Implementei testes unitários para validar regras de negócio e reduzir regressões.
 
+Possuo conhecimento básico em PHP e Laravel, aplicados em projetos acadêmicos.
+
 6. Experiências profissionais
 
 Desenvolvedor Full Stack (Autônomo)
@@ -243,6 +248,48 @@ Jul 2024 - Dez 2025
 
 Empresa focada em soluções educacionais e plataformas digitais.
 
+Contexto principal de atuação
+
+Atuação por cerca de 1 ano e meio na manutenção e evolução da plataforma UniCFC EAD, uma aplicação Ruby on Rails de grande porte utilizada por Centros de Formação de Condutores (CFCs) em diferentes estados do Brasil.
+
+A plataforma concentra fluxos acadêmicos, aulas remotas, matrículas, certificação e integrações externas e governamentais, exigindo compreensão de regras de negócio regulatórias e operação contínua em produção.
+
+Stack principal observada no projeto
+
+Backend
+
+Ruby 2.7
+Ruby on Rails 5
+MySQL
+ActiveRecord
+ActionCable
+Devise
+
+Frontend
+
+HTML / Slim
+CoffeeScript
+jQuery
+Rails Asset Pipeline
+CSS
+
+Infraestrutura e runtime
+
+Docker
+AWS
+Kubernetes (EKS)
+Nginx + Passenger
+
+Integrações relevantes no ecossistema da plataforma
+
+DETRANs estaduais
+Zoom
+Microsoft Teams
+AWS Rekognition
+SendGrid
+Conta Azul
+Pagar.me
+
 Atividades
 
 desenvolvimento e manutenção de sistemas web
@@ -252,6 +299,28 @@ evolução de plataforma EAD baseada em Ruby on Rails
 integração entre frontend e APIs backend
 
 desenvolvimento de integrações externas
+
+Contribuições e escopo real no projeto Ruby on Rails
+
+manutenção e evolução de funcionalidades frontend e backend em uma plataforma monolítica Ruby on Rails
+
+suporte a fluxos críticos ligados a matrículas, cursos EAD, aulas remotas, certificados e relatórios operacionais
+
+desenvolvimento e ajuste de telas e interações usando Slim, jQuery e CoffeeScript
+
+correção de bugs e manutenção de fluxos críticos de negócio em produção
+
+ajustes em regras de negócio, consultas ActiveRecord e integrações externas conforme demandas da plataforma
+
+participação na sustentação de integrações com serviços externos e sistemas governamentais, incluindo DETRAN
+
+Exemplos de escala e complexidade percebidas no sistema
+
+base monolítica com centenas de models, controllers e migrations
+
+múltiplos portais de usuário, incluindo áreas administrativas, aluno, instrutor e CFC
+
+operações sensíveis ligadas a contexto regulatório e educacional
 
 Principais entregas
 
@@ -343,6 +412,12 @@ Resultado
 
 redução de atualização de módulo de semanas para horas
 
+Impacto consolidado na plataforma
+
+contribuição para estabilidade de um sistema utilizado em operações regulatórias e educacionais
+
+correção de problemas operacionais que afetavam matrículas, aulas remotas e rotinas críticas
+
 Desenvolvedor e Suporte Técnico - TRE-MA
 
 Jun 2022 - Mai 2024
@@ -396,6 +471,36 @@ impede suspensão do sistema
 Resultado
 
 terminal dedicado estável e confiável para registro de ponto.
+
+Técnico de Urna - Eleições 2020 / 2024 - TRE-MA
+
+Set 2020 - Dez 2020
+
+Contexto principal de atuação
+
+Atuei como Auxiliar de Escritório e Técnico de Urna no TRE-MA, participando da coordenação logística das eleições na 2ª Zona Eleitoral de São Luís/MA.
+
+Atividades
+
+processo de carga, preparação e lacre das urnas eletrônicas
+
+suporte operacional aos mesários durante o pleito
+
+atendimento rápido a ocorrências nas seções eleitorais
+
+substituição de urnas por equipamentos de contingência quando necessário
+
+atendimento de diversas escolas e múltiplas seções eleitorais, garantindo agilidade e continuidade do processo de votação
+
+Atuação complementar nas Eleições de 2024
+
+atuação como Técnico em Informática
+
+instalação e configuração dos sistemas de totalização de votos
+
+suporte técnico aos administradores de prédio da 2ª Zona Eleitoral de São Luís/MA
+
+garantia do correto funcionamento da infraestrutura tecnológica utilizada na apuração eleitoral
 
 7. Projetos relevantes
 
@@ -638,7 +743,7 @@ desenvolvimento de produtos digitais completos (web e mobile)
 
 IFMA - Bacharelado em Sistemas de Informação
 
-IFMA - Técnico em Informática
+IFMA - Técnico em Informática (2014 - 2017)
 
 12. Cursos e certificações
 

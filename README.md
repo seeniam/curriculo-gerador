@@ -40,6 +40,13 @@ Agora:
 
 O gerador usa esses arquivos para orientar o HTML final ATS-friendly.
 
+Ao final da geracao, o pipeline salva:
+
+- o arquivo `.html`
+- o arquivo `.pdf` correspondente, gerado automaticamente via Chrome/Edge headless quando disponivel
+
+Isso melhora a consistencia da exportacao e tende a preservar hyperlinks clicaveis no PDF final.
+
 ## Como gerar
 
 1. Crie `.env` com `GEMINI_API_KEY`.
