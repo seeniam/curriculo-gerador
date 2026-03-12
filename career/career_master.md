@@ -101,7 +101,7 @@ pensamento computacional e engenharia aplicada
 
 3. Resumo profissional
 
-Software Engineer com experiência no desenvolvimento de aplicações web e mobile utilizando tecnologias modernas como React, Next.js, Node.js, TypeScript, Java e SQL. Atua na construção de produtos digitais completos, desde arquitetura até deploy em cloud, integrando APIs, bancos de dados e serviços externos. Possui experiência prática com APIs REST, regras de negócio em Java, Spring Boot em projetos de estudo e aplicação prática, uso de Docker para padronização de ambiente e implementação de testes unitários para validação de regras de negócio. Destaca-se pela capacidade de transformar processos manuais complexos em soluções automatizadas e eficientes.
+Software Engineer com experiência no desenvolvimento de aplicações web e mobile utilizando tecnologias modernas como React, Next.js, Node.js, TypeScript, Java, SQL e Ruby on Rails. Atua na construção e evolução de produtos digitais completos, desde arquitetura até deploy em cloud, integrando APIs, bancos de dados e serviços externos. Possui experiência prática com manutenção de sistemas monolíticos de negócio, APIs REST, regras de negócio em Java, Spring Boot em projetos de estudo e aplicação prática, uso de Docker para padronização de ambiente e implementação de testes unitários para validação de regras de negócio. Destaca-se pela capacidade de transformar processos manuais complexos em soluções automatizadas e eficientes.
 
 4. Competências principais
 
@@ -126,6 +126,8 @@ padronização de ambiente com Docker e Git
 testes unitários para validação de regras de negócio
 
 resolução de problemas operacionais complexos
+
+manutenção e evolução de monólitos Ruby on Rails
 
 5. Stack técnica
 
@@ -153,7 +155,7 @@ Backend
 Node.js
 Express
 Supabase
-Ruby on Rails (manutenção e integração)
+Ruby on Rails (manutenção, integração e evolução)
 APIs REST
 Spring Boot (projetos de estudo / aplicação prática)
 
@@ -252,7 +254,7 @@ Contexto principal de atuação
 
 Atuação por cerca de 1 ano e meio na manutenção e evolução da plataforma UniCFC EAD, uma aplicação Ruby on Rails de grande porte utilizada por Centros de Formação de Condutores (CFCs) em diferentes estados do Brasil.
 
-A plataforma concentra fluxos acadêmicos, aulas remotas, matrículas, certificação e integrações externas e governamentais, exigindo compreensão de regras de negócio regulatórias e operação contínua em produção.
+A plataforma concentra fluxos acadêmicos, aulas remotas, matrículas, certificação, pagamentos, biometria e integrações externas e governamentais, exigindo compreensão de regras de negócio regulatórias e operação contínua em produção.
 
 Stack principal observada no projeto
 
@@ -289,6 +291,7 @@ AWS Rekognition
 SendGrid
 Conta Azul
 Pagar.me
+Webex
 
 Atividades
 
@@ -316,9 +319,9 @@ participação na sustentação de integrações com serviços externos e sistem
 
 Exemplos de escala e complexidade percebidas no sistema
 
-base monolítica com centenas de models, controllers e migrations
+monólito com 116 controllers, 140 models, 29 services, mais de 1300 views e 558 migrations
 
-múltiplos portais de usuário, incluindo áreas administrativas, aluno, instrutor e CFC
+arquitetura multiportal com áreas administrativas, aluno, instrutor, palestrante, CFC, revenda e coleta biométrica
 
 operações sensíveis ligadas a contexto regulatório e educacional
 
@@ -599,6 +602,34 @@ embeddings automáticos
 busca semântica
 
 chat com base de conhecimento
+
+UniCFC EAD
+
+Plataforma EAD e de aulas remotas para Centros de Formação de Condutores, mantida durante atuação na UNITEG.
+
+Stack
+
+Ruby on Rails
+Ruby
+MySQL
+Slim
+CoffeeScript
+jQuery
+Docker
+AWS
+Kubernetes
+
+Escopo de atuação
+
+manutenção e evolução de plataforma monolítica de negócio
+
+atuação em fluxos de matrículas, cursos, aulas remotas, certificados e relatórios
+
+integrações com DETRANs estaduais, Datavalid, Zoom, Teams, Webex, Conta Azul e Pagar.me
+
+ajustes em frontend legado com Slim, CoffeeScript e jQuery
+
+sustentação de operação regulatória com múltiplos portais e regras por UF
 
 8. Automação e ferramentas desenvolvidas
 
