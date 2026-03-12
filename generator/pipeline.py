@@ -211,7 +211,7 @@ def export_html_to_pdf(html_output_path: Path) -> Path | None:
         "New-Item -ItemType Directory -Force -Path $profile | Out-Null; "
         f"& '{browser_path_escaped}' '--headless=new' '--disable-gpu' '--no-first-run' "
         "'--disable-crash-reporter' '--disable-breakpad' '--no-default-browser-check' "
-        "\"--user-data-dir=$profile\" '--print-to-pdf-no-header' "
+        "\"--user-data-dir=$profile\" '--no-pdf-header-footer' '--print-to-pdf-no-header' "
         "\"--print-to-pdf=$pdf\" $html.Path"
     )
     command = [
