@@ -9,15 +9,108 @@ import time
 import unicodedata
 from pathlib import Path
 
-import google.generativeai as genai
-from dotenv import load_dotenv
-
 from generator.io_utils import ensure_directory, find_job_files, find_latest_job_file, inline_css, read_text
 
 
 FORBIDDEN_PHRASES = (
     "AI-Enabled Products",
+    "Superior completo em andamento no histórico informado",
+    "Superior completo em andamento no historico informado",
 )
+
+ONE_PAGE_CSS = """
+html[data-layout="one-page"] {
+    font-size: 14px;
+}
+
+html[data-layout="one-page"] body {
+    line-height: 1.3;
+    background: #fff;
+}
+
+html[data-layout="one-page"] .resume-shell {
+    max-width: 794px;
+    padding: 18px 20px 20px;
+    border-radius: 16px;
+    box-shadow: 0 14px 32px rgba(16, 42, 67, 0.06);
+}
+
+html[data-layout="one-page"] .resume-header {
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+}
+
+html[data-layout="one-page"] .resume-header h1 {
+    font-size: 1.55rem;
+}
+
+html[data-layout="one-page"] .headline {
+    margin: 6px 0 4px;
+    font-size: 0.95rem;
+}
+
+html[data-layout="one-page"] .contact-line,
+html[data-layout="one-page"] .meta,
+html[data-layout="one-page"] .submeta {
+    font-size: 0.88rem;
+}
+
+html[data-layout="one-page"] section {
+    margin-bottom: 12px;
+}
+
+html[data-layout="one-page"] h2 {
+    margin-bottom: 7px;
+    padding-bottom: 4px;
+    font-size: 0.92rem;
+}
+
+html[data-layout="one-page"] h3 {
+    margin-bottom: 2px;
+    font-size: 0.95rem;
+}
+
+html[data-layout="one-page"] p {
+    margin-bottom: 6px;
+}
+
+html[data-layout="one-page"] ul {
+    margin-top: 4px;
+    padding-left: 18px;
+}
+
+html[data-layout="one-page"] li {
+    margin-bottom: 3px;
+}
+
+html[data-layout="one-page"] article {
+    margin-bottom: 8px;
+    padding: 0;
+}
+
+html[data-layout="one-page"] .item-header {
+    gap: 10px;
+}
+
+html[data-layout="one-page"] .item-header .meta {
+    font-size: 0.85rem;
+}
+
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    html[data-layout="one-page"] .resume-shell {
+        max-width: none;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}
+""".strip()
 
 
 def resolve_context(base_dir: Path) -> dict[str, Path]:
@@ -30,6 +123,7 @@ def resolve_context(base_dir: Path) -> dict[str, Path]:
         "persona_en": base_dir / "generator" / "persona_headhunter_en.md",
         "legacy_default_pt": base_dir / "legacy" / "default_pt.html",
         "legacy_default_en": base_dir / "legacy" / "default.html",
+        "portfolio_visual": base_dir / "portfolio-visual.pdf",
         "output_dir": base_dir / "output",
     }
 
@@ -43,7 +137,19 @@ def build_prompt(
     rendered_template: str,
     legacy_default_pt: str,
     legacy_default_en: str,
+    one_page: bool,
 ) -> str:
+    layout_rules = """
+9. Keep the content density balanced for a strong professional resume.
+""".strip()
+    if one_page:
+        layout_rules = """
+9. This resume must fit on exactly one A4 page when printed to PDF.
+10. Prioritize only the most relevant content for the target job.
+11. Prefer shorter summaries, fewer bullets, tighter wording, and omitting lower-priority sections when needed to keep it on one page.
+12. Do not fake compactness with unreadable text. Keep it credible, readable, and professional.
+""".strip()
+
     return f"""
 You are generating an ATS-friendly HTML resume.
 
@@ -93,6 +199,7 @@ The source of truth is the Markdown career master. The HTML files in legacy are 
 6. Never invent facts. If information is missing, omit it gracefully or keep conservative placeholders only if strictly necessary.
 7. Preserve professional credibility and natural language.
 8. Ensure the final document is printable and clean.
+{layout_rules}
 """
 
 
@@ -116,6 +223,43 @@ def sanitize_html_output(html_output: str) -> str:
     return sanitized
 
 
+def append_css_override(html_output: str, css_text: str) -> str:
+    if not css_text.strip():
+        return html_output
+
+    style_close_tag = "</style>"
+    if style_close_tag in html_output:
+        return html_output.replace(style_close_tag, f"\n{css_text}\n{style_close_tag}", 1)
+
+    head_close_tag = "</head>"
+    if head_close_tag in html_output:
+        return html_output.replace(head_close_tag, f"<style>\n{css_text}\n</style>\n{head_close_tag}", 1)
+
+    return html_output
+
+
+def apply_layout_mode(html_output: str, *, one_page: bool) -> str:
+    if not one_page:
+        return html_output
+
+    html_output = re.sub(
+        r"<html(\s[^>]*)?>",
+        lambda match: (
+            "<html data-layout=\"one-page\">"
+            if not match.group(1)
+            else (
+                match.group(0)
+                if "data-layout=" in match.group(0)
+                else f"<html{match.group(1)} data-layout=\"one-page\">"
+            )
+        ),
+        html_output,
+        count=1,
+        flags=re.IGNORECASE,
+    )
+    return append_css_override(html_output, ONE_PAGE_CSS)
+
+
 def validate_html_output(html_output: str) -> list[str]:
     warnings: list[str] = []
 
@@ -132,6 +276,123 @@ def validate_html_output(html_output: str) -> list[str]:
             warnings.append(f"forbidden phrase detected: {phrase}")
 
     return warnings
+
+
+def load_local_env(env_path: Path) -> None:
+    if not env_path.exists():
+        return
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if key and key not in os.environ:
+            os.environ[key] = value
+
+
+class CodexCliResumeModel:
+    def __init__(self, *, base_dir: Path, model: str | None = None, profile: str | None = None) -> None:
+        self.base_dir = base_dir
+        self.model = model
+        self.profile = profile
+        self.executable = self.resolve_executable()
+
+    def resolve_executable(self) -> str | None:
+        configured_path = os.getenv("CODEX_CLI_PATH")
+        if configured_path and Path(configured_path).exists():
+            return configured_path
+
+        path_executable = shutil.which("codex")
+        if path_executable:
+            return path_executable
+
+        if os.name != "nt":
+            return None
+
+        home_dir = Path.home()
+        extension_roots = [
+            home_dir / ".vscode" / "extensions",
+            home_dir / ".cursor" / "extensions",
+            home_dir / ".vscode-insiders" / "extensions",
+        ]
+        matches: list[Path] = []
+        for root in extension_roots:
+            if root.exists():
+                matches.extend(root.glob("openai.chatgpt-*/bin/windows-x86_64/codex.exe"))
+
+        if not matches:
+            return None
+
+        newest_match = max(matches, key=lambda path: path.stat().st_mtime)
+        return str(newest_match)
+
+    def is_available(self) -> bool:
+        return bool(self.executable)
+
+    def generate_html(self, prompt: str) -> str:
+        if not self.executable:
+            raise RuntimeError("Codex CLI was not found in PATH.")
+
+        codex_prompt = f"""
+You are the resume generation engine for this local application.
+
+Return only the final HTML requested below. Do not inspect or edit files. Do not run shell commands.
+The application already included all source material in the prompt.
+
+{prompt}
+""".strip()
+
+        temp_dir = self.base_dir / "output" / ".codex-cli"
+        ensure_directory(temp_dir)
+        output_path = temp_dir / f"codex-final-message-{time.strftime('%Y%m%d_%H%M%S')}.html"
+        command = [
+            self.executable,
+            "exec",
+            "-",
+            "--cd",
+            str(self.base_dir),
+            "--sandbox",
+            "read-only",
+            "--ephemeral",
+            "--color",
+            "never",
+            "--output-last-message",
+            str(output_path),
+        ]
+        if self.model:
+            command.extend(["--model", self.model])
+        if self.profile:
+            command.extend(["--profile", self.profile])
+
+        result = subprocess.run(
+            command,
+            input=codex_prompt,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+            timeout=300,
+        )
+
+        if result.returncode != 0:
+            error_output = result.stderr.strip() or result.stdout.strip() or "unknown Codex CLI error"
+            raise RuntimeError(error_output)
+
+        if output_path.exists():
+            final_message = output_path.read_text(encoding="utf-8").strip()
+            if final_message:
+                try:
+                    output_path.unlink()
+                except OSError:
+                    pass
+                return final_message
+
+        return result.stdout.strip()
 
 
 def slugify_filename_part(value: str) -> str:
@@ -159,15 +420,22 @@ def slugify_filename_part(value: str) -> str:
     return slug or "empresa"
 
 
-def build_output_path(output_dir: Path, job_file: Path) -> Path:
-    company_slug = slugify_filename_part(job_file.stem)
-    preferred_name = f"curriculo-{company_slug}_neemias.html"
+def build_output_path(output_dir: Path, job_file: Path, *, one_page: bool, output_name: str | None) -> Path:
+    if output_name:
+        requested_name = Path(output_name).name
+        preferred_name = str(Path(requested_name).with_suffix(".html"))
+        return output_dir / preferred_name
+    else:
+        company_slug = slugify_filename_part(job_file.stem)
+        suffix = "_1pagina" if one_page else ""
+        preferred_name = f"curriculo-{company_slug}_neemias{suffix}.html"
+
     preferred_path = output_dir / preferred_name
     if not preferred_path.exists():
         return preferred_path
 
     timestamp = time.strftime("%Y%m%d_%H%M%S")
-    return output_dir / f"curriculo-{company_slug}_neemias_{timestamp}.html"
+    return output_dir / f"{preferred_path.stem}_{timestamp}.html"
 
 
 def build_pdf_output_path(html_output_path: Path) -> Path:
@@ -247,12 +515,47 @@ def export_html_to_pdf(html_output_path: Path) -> Path | None:
     return pdf_output_path
 
 
+def append_portfolio_to_pdf(pdf_output_path: Path, portfolio_path: Path) -> Path | None:
+    if not portfolio_path.exists():
+        print(f"[!] Portfolio append skipped: {portfolio_path.name} not found.")
+        return None
+
+    try:
+        from pypdf import PdfReader, PdfWriter
+    except ImportError:
+        print("[!] Portfolio append skipped: install pypdf with 'pip install pypdf'.")
+        return None
+
+    merged_output_path = pdf_output_path.with_suffix(".merged.pdf")
+    writer = PdfWriter()
+
+    try:
+        for source_path in (pdf_output_path, portfolio_path):
+            reader = PdfReader(str(source_path))
+            for page in reader.pages:
+                writer.add_page(page)
+
+        with merged_output_path.open("wb") as output_file:
+            writer.write(output_file)
+
+        merged_output_path.replace(pdf_output_path)
+        return pdf_output_path
+    except Exception as exc:
+        if merged_output_path.exists():
+            try:
+                merged_output_path.unlink()
+            except OSError:
+                pass
+        print(f"[!] Portfolio append failed: {exc}")
+        return None
+
+
 def generate_for_job(
     *,
     job_file: Path,
     base_dir: Path,
     context: dict[str, Path],
-    model: genai.GenerativeModel,
+    model: CodexCliResumeModel,
     career_master: str,
     raw_notes: str,
     template_html: str,
@@ -261,6 +564,8 @@ def generate_for_job(
     persona_en: str,
     legacy_default_pt: str,
     legacy_default_en: str,
+    one_page: bool,
+    output_name: str | None,
 ) -> None:
     job_description = read_text(job_file)
     if not job_description:
@@ -277,23 +582,29 @@ def generate_for_job(
         rendered_template=rendered_template,
         legacy_default_pt=legacy_default_pt,
         legacy_default_en=legacy_default_en,
+        one_page=one_page,
     )
 
     print(f"-> Generating ATS-friendly HTML resume for: {job_file.relative_to(base_dir)}")
-    response = model.generate_content(
-        prompt,
-        generation_config=genai.types.GenerationConfig(temperature=0.2),
-    )
-    html_output = sanitize_html_output(response.text)
+    html_output = sanitize_html_output(model.generate_html(prompt))
+    html_output = apply_layout_mode(html_output, one_page=one_page)
     warnings = validate_html_output(html_output)
 
     ensure_directory(context["output_dir"])
-    output_path = build_output_path(context["output_dir"], job_file)
+    output_path = build_output_path(
+        context["output_dir"],
+        job_file,
+        one_page=one_page,
+        output_name=output_name,
+    )
     output_path.write_text(html_output, encoding="utf-8")
 
     print(f"[+] Saved as: {output_path}")
     pdf_output_path = export_html_to_pdf(output_path)
     if pdf_output_path:
+        appended_pdf_path = append_portfolio_to_pdf(pdf_output_path, context["portfolio_visual"])
+        if appended_pdf_path:
+            print(f"[+] Portfolio appended from: {context['portfolio_visual']}")
         print(f"[+] PDF saved as: {pdf_output_path}")
     for warning in warnings:
         print(f"[!] Output warning for {job_file.name}: {warning}")
@@ -311,6 +622,16 @@ def parse_args() -> argparse.Namespace:
         type=str,
         help="Generate only for a specific job file path.",
     )
+    parser.add_argument(
+        "--one-page",
+        action="store_true",
+        help="Generate a compact resume intended to fit on a single A4 page before exporting to PDF.",
+    )
+    parser.add_argument(
+        "--output-name",
+        type=str,
+        help="Force the generated output file name for a single job, for example curriculo-frontend_neemias.pdf.",
+    )
     return parser.parse_args()
 
 
@@ -320,18 +641,13 @@ def main() -> None:
     context = resolve_context(base_dir)
 
     print("====================================")
-    print(" AI Tailored CV Generator           ")
+    print(" Codex Tailored CV Generator        ")
     print("====================================")
     print("-> Architecture: Markdown source of truth + HTML template")
+    if args.one_page:
+        print("-> Layout mode: one-page compact resume (HTML first, PDF after)")
 
-    load_dotenv(base_dir / ".env")
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        print("\n[!] ERROR: API Key not found!")
-        print(f"Please create a '.env' file in {base_dir}")
-        print("Add the following line: GEMINI_API_KEY=your_api_key_here")
-        print("You can get a free key at: https://aistudio.google.com/app/apikey\n")
-        return
+    load_local_env(base_dir / ".env")
 
     if args.job:
         requested_job = Path(args.job)
@@ -348,6 +664,8 @@ def main() -> None:
         return
 
     if args.all:
+        if args.output_name:
+            print("[!] --output-name is ignored when using --all.")
         print("-> Job files detected:")
         for job_file in job_files:
             print(f"   - {job_file.relative_to(base_dir)}")
@@ -377,8 +695,16 @@ def main() -> None:
             print(f" - {item}")
         return
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.5-flash")
+    model = CodexCliResumeModel(
+        base_dir=base_dir,
+        model=os.getenv("CODEX_MODEL"),
+        profile=os.getenv("CODEX_PROFILE"),
+    )
+    if not model.is_available():
+        print("\n[!] ERROR: Codex CLI not found!")
+        print("Install/login to Codex CLI, then run this generator again.")
+        print("Optional .env settings: CODEX_MODEL and CODEX_PROFILE\n")
+        return
 
     try:
         for job_file in job_files:
@@ -395,9 +721,11 @@ def main() -> None:
                 persona_en=persona_en,
                 legacy_default_pt=legacy_default_pt,
                 legacy_default_en=legacy_default_en,
+                one_page=args.one_page,
+                output_name=None if args.all else args.output_name,
             )
 
         print("\n[+] SUCCESS! Resume generation completed.")
         print("-> Source of truth used: career/career_master.md\n")
     except Exception as exc:
-        print(f"\n[-] An error occurred during Gemini API generation: {exc}")
+        print(f"\n[-] An error occurred during Codex generation: {exc}")

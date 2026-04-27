@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume - Candidate Name - Target Role</title>
+    <title>Resume - Candidate Name</title>
     <style>
 {{INLINE_CSS}}
     </style>
@@ -13,7 +13,13 @@
         <header class="resume-header">
             <h1>Candidate Name</h1>
             <p class="headline">Target Role</p>
-            <p class="contact-line">City, Country | email@example.com | phone | LinkedIn | GitHub</p>
+            <p class="contact-line">
+                City, Country |
+                <a href="mailto:email@example.com">email@example.com</a> |
+                <a href="tel:+10000000000">phone</a> |
+                <a href="https://www.linkedin.com/in/username">LinkedIn</a> |
+                <a href="https://github.com/username">GitHub</a>
+            </p>
         </header>
 
         <section aria-labelledby="summary-title">
@@ -38,8 +44,11 @@
         <section aria-labelledby="experience-title">
             <h2 id="experience-title">Professional Experience</h2>
             <article>
-                <h3>Job Title | Company</h3>
-                <p class="meta">Location | Dates</p>
+                <div class="item-header">
+                    <h3>Job Title | Company</h3>
+                    <p class="meta">Dates</p>
+                </div>
+                <p class="submeta">Location</p>
                 <ul>
                     <li>Impact-oriented bullet.</li>
                     <li>Impact-oriented bullet.</li>
@@ -51,16 +60,23 @@
         <section aria-labelledby="projects-title">
             <h2 id="projects-title">Selected Projects</h2>
             <article>
-                <h3>Project Name</h3>
+                <div class="item-header">
+                    <h3>Project Name</h3>
+                    <p class="meta">Year</p>
+                </div>
                 <p>Short explanation of the project, stack, and impact.</p>
             </article>
         </section>
 
         <section aria-labelledby="education-title">
             <h2 id="education-title">Education</h2>
-            <ul>
-                <li>Degree, Institution, Year</li>
-            </ul>
+            <article>
+                <div class="item-header">
+                    <h3>Degree | Institution</h3>
+                    <p class="meta">Year</p>
+                </div>
+                <p class="submeta">Additional detail if relevant</p>
+            </article>
         </section>
 
         <section aria-labelledby="certifications-title">

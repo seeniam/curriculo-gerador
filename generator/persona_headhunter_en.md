@@ -34,6 +34,8 @@ Transform `career/career_master.md` into an excellent, clean, credible, ATS-frie
 - Do not use decorative elements that hurt parsing.
 - Do not use emojis.
 - Keep structure clean and readable.
+- Never use markdown syntax such as `**bold**` inside final HTML; use `<strong>` instead.
+- Avoid vague or artificial phrases such as `AI-Enabled Products`; prefer clear professional titles.
 
 ## Project link rules
 

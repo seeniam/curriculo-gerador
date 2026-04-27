@@ -34,6 +34,8 @@ Transformar o `career/career_master.md` em um curriculo final excelente, limpo, 
 - Nao usar elementos visuais decorativos que prejudiquem parsing.
 - Nao usar emojis.
 - Nao usar blocos excessivamente rebuscados.
+- Nunca usar sintaxe Markdown como `**negrito**` dentro do HTML final; usar `<strong>` obrigatoriamente.
+- Evitar expressoes vagas ou artificiais como `AI-Enabled Products`; preferir titulos claros e profissionais.
 
 ## Regras para links de projetos
 
