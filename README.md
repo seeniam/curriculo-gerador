@@ -108,6 +108,31 @@ gerar_curriculo_pdf.bat
 Esse atalho usa automaticamente a vaga mais recente encontrada na raiz do projeto, em `jobs/` ou em `legacy/`.
 Ele gera o PDF em `output/`, remove o HTML intermediario e nao anexa o portfolio visual.
 
+## Gerador com Interface Local
+
+A interface local automatiza a entrada da vaga, mas nao substitui a pipeline. Ela salva a descricao em `legacy/`, chama o mesmo gerador Python e coloca o PDF final em `output/`.
+
+Para abrir a UI no Windows:
+
+```bat
+abrir_gerador_curriculo_ui.bat
+```
+
+Depois:
+
+1. Cole a descricao da vaga.
+2. Informe cargo e empresa.
+3. Clique em `Gerar curriculo`.
+4. Revise o PDF final salvo em `output/`.
+
+A aplicacao roda localmente em:
+
+```text
+http://127.0.0.1:5000
+```
+
+Se o Flask ainda nao estiver instalado, o BAT tenta instalar as dependencias minimas de `requirements.txt`.
+
 No Windows, tambem pode usar:
 
 ```bat
