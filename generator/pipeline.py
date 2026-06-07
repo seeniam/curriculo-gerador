@@ -18,73 +18,79 @@ FORBIDDEN_PHRASES = (
     "Superior completo em andamento no historico informado",
 )
 
+WHATSAPP_URL = (
+    "https://api.whatsapp.com/send/?phone=5598982975194&text=Ol%C3%A1%2C+"
+    "gostaria+de+falar+com+voc%C3%AA+sobre+uma+vaga...&type=phone_number&app_absent=0"
+)
+
 ONE_PAGE_CSS = """
 html[data-layout="one-page"] {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 html[data-layout="one-page"] body {
-    line-height: 1.3;
+    line-height: 1.18;
     background: #fff;
 }
 
 html[data-layout="one-page"] .resume-shell {
     max-width: 794px;
-    padding: 18px 20px 20px;
-    border-radius: 16px;
-    box-shadow: 0 14px 32px rgba(16, 42, 67, 0.06);
+    padding: 12px 16px 14px;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 html[data-layout="one-page"] .resume-header {
-    margin-bottom: 14px;
-    padding-bottom: 10px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
 }
 
 html[data-layout="one-page"] .resume-header h1 {
-    font-size: 1.55rem;
+    font-size: 1.48rem;
+    line-height: 1.05;
 }
 
 html[data-layout="one-page"] .headline {
-    margin: 6px 0 4px;
-    font-size: 0.95rem;
+    margin: 4px 0 3px;
+    font-size: 0.91rem;
 }
 
 html[data-layout="one-page"] .contact-line,
 html[data-layout="one-page"] .meta,
 html[data-layout="one-page"] .submeta {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
 }
 
 html[data-layout="one-page"] section {
-    margin-bottom: 12px;
+    margin-bottom: 7px;
 }
 
 html[data-layout="one-page"] h2 {
-    margin-bottom: 7px;
-    padding-bottom: 4px;
-    font-size: 0.92rem;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    font-size: 0.84rem;
 }
 
 html[data-layout="one-page"] h3 {
-    margin-bottom: 2px;
-    font-size: 0.95rem;
+    margin-bottom: 1px;
+    font-size: 0.9rem;
 }
 
 html[data-layout="one-page"] p {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 html[data-layout="one-page"] ul {
-    margin-top: 4px;
-    padding-left: 18px;
+    margin-top: 2px;
+    padding-left: 15px;
 }
 
 html[data-layout="one-page"] li {
-    margin-bottom: 3px;
+    margin-bottom: 1px;
 }
 
 html[data-layout="one-page"] article {
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     padding: 0;
 }
 
@@ -93,13 +99,13 @@ html[data-layout="one-page"] .item-header {
 }
 
 html[data-layout="one-page"] .item-header .meta {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
 }
 
 @media print {
     @page {
         size: A4;
-        margin: 10mm;
+        margin: 8mm;
     }
 
     html[data-layout="one-page"] .resume-shell {
@@ -148,6 +154,8 @@ def build_prompt(
 10. Prioritize only the most relevant content for the target job.
 11. Prefer shorter summaries, fewer bullets, tighter wording, and omitting lower-priority sections when needed to keep it on one page.
 12. Do not fake compactness with unreadable text. Keep it credible, readable, and professional.
+13. Use a compact structure similar to: header, professional summary, core skills, technical skills, experience, selected projects, education, courses/certifications.
+14. Keep education and certifications visually separated at the end, not merged into a single paragraph.
 """.strip()
 
     return f"""
@@ -203,6 +211,26 @@ The source of truth is the Markdown career master. The HTML files in legacy are 
 """
 
 
+def normalize_whatsapp_contact(html_output: str) -> str:
+    phone_link_pattern = re.compile(
+        r'<a\s+href=["\']tel:\+?5598982975194["\']>\s*(?:\+55\s*)?98\s*98297[-\s]?5194\s*</a>',
+        flags=re.IGNORECASE,
+    )
+    html_output = phone_link_pattern.sub(
+        f'<a href="{WHATSAPP_URL}">WhatsApp</a>',
+        html_output,
+    )
+
+    whatsapp_link_pattern = re.compile(
+        r'<a\s+href=["\']https://api\.whatsapp\.com/send/\?phone=5598982975194(?:[^"\']*)?["\']>\s*(?:Whatsapp|WhatsApp|\+55\s*98\s*98297[-\s]?5194)\s*</a>',
+        flags=re.IGNORECASE,
+    )
+    return whatsapp_link_pattern.sub(
+        f'<a href="{WHATSAPP_URL}">WhatsApp</a>',
+        html_output,
+    )
+
+
 def sanitize_html_output(html_output: str) -> str:
     sanitized = (
         html_output.replace("```html\n", "")
@@ -218,6 +246,7 @@ def sanitize_html_output(html_output: str) -> str:
     sanitized = re.sub(r"\s+\|\s+\|", " |", sanitized)
     sanitized = re.sub(r"\|\s*</", "</", sanitized)
     sanitized = re.sub(r">\s*\|\s*", "> ", sanitized)
+    sanitized = normalize_whatsapp_contact(sanitized)
     sanitized = re.sub(r"\(\s*\)", "", sanitized)
     sanitized = re.sub(r"\s{2,}", " ", sanitized)
     return sanitized
@@ -515,6 +544,23 @@ def export_html_to_pdf(html_output_path: Path) -> Path | None:
     return pdf_output_path
 
 
+def cleanup_browser_profile(output_dir: Path) -> None:
+    browser_profile_dir = output_dir / ".browser-profile"
+    if not browser_profile_dir.exists():
+        return
+
+    for attempt in range(3):
+        try:
+            shutil.rmtree(browser_profile_dir)
+            print(f"[+] Browser temporary profile removed: {browser_profile_dir.name}")
+            return
+        except OSError:
+            if attempt == 2:
+                print(f"[!] Could not remove browser temporary profile: {browser_profile_dir}")
+                return
+            time.sleep(1)
+
+
 def append_portfolio_to_pdf(pdf_output_path: Path, portfolio_path: Path) -> Path | None:
     if not portfolio_path.exists():
         print(f"[!] Portfolio append skipped: {portfolio_path.name} not found.")
@@ -566,6 +612,8 @@ def generate_for_job(
     legacy_default_en: str,
     one_page: bool,
     output_name: str | None,
+    pdf_only: bool,
+    append_portfolio: bool,
 ) -> None:
     job_description = read_text(job_file)
     if not job_description:
@@ -602,10 +650,18 @@ def generate_for_job(
     print(f"[+] Saved as: {output_path}")
     pdf_output_path = export_html_to_pdf(output_path)
     if pdf_output_path:
-        appended_pdf_path = append_portfolio_to_pdf(pdf_output_path, context["portfolio_visual"])
-        if appended_pdf_path:
-            print(f"[+] Portfolio appended from: {context['portfolio_visual']}")
+        if append_portfolio:
+            appended_pdf_path = append_portfolio_to_pdf(pdf_output_path, context["portfolio_visual"])
+            if appended_pdf_path:
+                print(f"[+] Portfolio appended from: {context['portfolio_visual']}")
         print(f"[+] PDF saved as: {pdf_output_path}")
+        if pdf_only:
+            try:
+                output_path.unlink()
+                print(f"[+] Temporary HTML removed: {output_path.name}")
+            except OSError as exc:
+                print(f"[!] Could not remove temporary HTML: {exc}")
+            cleanup_browser_profile(context["output_dir"])
     for warning in warnings:
         print(f"[!] Output warning for {job_file.name}: {warning}")
 
@@ -631,6 +687,16 @@ def parse_args() -> argparse.Namespace:
         "--output-name",
         type=str,
         help="Force the generated output file name for a single job, for example curriculo-frontend_neemias.pdf.",
+    )
+    parser.add_argument(
+        "--pdf-only",
+        action="store_true",
+        help="Keep only the generated PDF and remove the intermediate HTML after export.",
+    )
+    parser.add_argument(
+        "--no-portfolio",
+        action="store_true",
+        help="Do not append portfolio-visual.pdf to the generated resume PDF.",
     )
     return parser.parse_args()
 
@@ -723,6 +789,8 @@ def main() -> None:
                 legacy_default_en=legacy_default_en,
                 one_page=args.one_page,
                 output_name=None if args.all else args.output_name,
+                pdf_only=args.pdf_only,
+                append_portfolio=not args.no_portfolio,
             )
 
         print("\n[+] SUCCESS! Resume generation completed.")

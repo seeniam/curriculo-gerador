@@ -42,7 +42,7 @@ Portfólio
 https://neemiascarvalhosantos.vercel.app/
 
 WhatsApp
-https://api.whatsapp.com/send/?phone=5598982975194
+https://api.whatsapp.com/send/?phone=5598982975194&text=Ol%C3%A1%2C+gostaria+de+falar+com+voc%C3%AA+sobre+uma+vaga...&type=phone_number&app_absent=0
 
 2. Posicionamento de mercado
 
@@ -501,7 +501,7 @@ Sistema SAE não permitia exportação direta de dados.
 
 Dados de alunos estavam disponíveis apenas em interface visual.
 
-Mais de 5000 registros precisavam ser migrados.
+Mais de 5000 registros por cliente precisavam ser migrados.
 
 Processo manual
 
@@ -509,7 +509,9 @@ Processo manual
 
 OCR manual
 
-união manual de planilhas
+geração e conferência de mais de 300 planilhas
+
+união manual das planilhas em uma base única
 
 Tempo médio
 
@@ -529,7 +531,7 @@ openpyxl
 
 Fluxo automatizado
 
-captura de tela -> OCR -> geração de planilha -> consolidação automática
+captura de tela -> OCR -> geração de planilhas individuais -> consolidação automática em uma única planilha final
 
 Resultado
 
@@ -1516,7 +1518,9 @@ automação em Python com PyAutoGUI, OpenCV, Tesseract OCR, Pillow e openpyxl
 
 captura de dados a partir de interface visual quando o sistema de origem não permitia exportação direta
 
-pipeline automatizado de captura de tela, OCR, geração de planilha e consolidação de dados
+pipeline automatizado de captura de tela, OCR, geração de planilhas individuais e consolidação de dados em uma única planilha final
+
+processamento de mais de 5000 registros por cliente, com geração e unificação de mais de 300 planilhas
 
 redução de processo manual de aproximadamente 3 dias para cerca de 1h30
 
