@@ -4,66 +4,144 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gerador de Curriculo Inteligente</title>
-    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg', v='20260607') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg', v='20260608') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css', v='20260608') }}">
 </head>
 <body>
     <main class="app-shell">
-        <section class="hero">
-            <div>
-                <p class="eyebrow">Curriculo personalizado em PDF</p>
-                <img class="brand-logo" src="{{ url_for('static', filename='logo.svg', v='20260607') }}" alt="Gerador de Curriculo Inteligente">
-                <p class="subtitle">Cole a descricao da vaga e gere uma versao personalizada do curriculo em PDF.</p>
+        <section class="hero" aria-labelledby="page-title">
+            <div class="hero-lines" aria-hidden="true"></div>
+            <div class="brand-lockup">
+                <svg class="brand-mark" viewBox="0 0 156 156" role="img" aria-label="Logo Gerador de Curriculo Inteligente">
+                    <defs>
+                        <linearGradient id="markPaper" x1="26" x2="135" y1="18" y2="138" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#f8fdff"/>
+                            <stop offset="1" stop-color="#d9f7ff"/>
+                        </linearGradient>
+                        <linearGradient id="markBrain" x1="45" x2="125" y1="48" y2="120" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#5eead4"/>
+                            <stop offset=".52" stop-color="#22d3ee"/>
+                            <stop offset="1" stop-color="#2563eb"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M49 15h62l32 33v88a12 12 0 0 1-12 12H49a12 12 0 0 1-12-12V27a12 12 0 0 1 12-12Z" fill="none" stroke="#f8fbff" stroke-width="7"/>
+                    <path d="M110 16v24a13 13 0 0 0 13 13h20" fill="none" stroke="#f8fbff" stroke-width="7" stroke-linejoin="round"/>
+                    <path d="M13 63h31m-31 28h31m-31 28h31" fill="none" stroke="#e8f8ff" stroke-width="6" stroke-linecap="round"/>
+                    <circle cx="13" cy="63" r="6" fill="#071a3d" stroke="#e8f8ff" stroke-width="5"/>
+                    <circle cx="13" cy="91" r="6" fill="#071a3d" stroke="#e8f8ff" stroke-width="5"/>
+                    <circle cx="13" cy="119" r="6" fill="#071a3d" stroke="#e8f8ff" stroke-width="5"/>
+                    <path d="M54 89c-10-10-3-25 12-25 3-13 20-18 31-9 12-12 35-4 35 14 12 3 18 17 9 27 8 14-5 29-21 27-3 17-27 16-32 1-14 5-31-4-31-19-8-1-13-6-14-16Z" fill="url(#markBrain)" stroke="#073b73" stroke-width="6" stroke-linejoin="round"/>
+                    <path d="M89 57v57m16-54c-9 10-9 21 0 32m-36-9c12-3 20 1 24 11m28 7c-13-3-22 1-28 12" fill="none" stroke="#f5ffff" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+                    <circle cx="72" cy="101" r="6" fill="#ccfbf1"/>
+                    <circle cx="128" cy="96" r="6" fill="#ccfbf1"/>
+                </svg>
+                <div class="brand-copy">
+                    <h1 id="page-title">
+                        <span>Gerador de</span>
+                        <span><strong>Curriculo</strong> Inteligente</span>
+                    </h1>
+                    <p class="subtitle">Cole a descricao da vaga e gere uma versao personalizada do curriculo em PDF.</p>
+                </div>
             </div>
-            <div class="status-pill">Localhost seguro</div>
+            <div class="status-pill">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.8 8.6-7 10-4.2-1.4-7-5.5-7-10V6l7-3Z"/><path d="M8.8 12l2.1 2.1 4.4-4.7"/></svg>
+                <span>Localhost seguro</span>
+            </div>
         </section>
 
-        <section class="workspace">
+        <section class="workspace" aria-label="Gerador de curriculo">
             <form id="resume-form" class="panel form-panel">
                 <div class="field-grid">
                     <label>
-                        <span>Cargo / Nome da vaga</span>
+                        <span class="label-title">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1"/><path d="M4 8h16v11H4z"/><path d="M4 12h16"/></svg>
+                            Cargo / Nome da vaga
+                        </span>
                         <input id="job-title" name="jobTitle" type="text" placeholder="Ex: Desenvolvedor Front End React">
                     </label>
                     <label>
-                        <span>Empresa</span>
+                        <span class="label-title">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21h16"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/><path d="M9 8h1m4 0h1M9 12h1m4 0h1M9 16h1m4 0h1"/></svg>
+                            Empresa
+                        </span>
                         <input id="company" name="company" type="text" placeholder="Ex: Frete.com">
                     </label>
                 </div>
 
                 <label class="description-field">
-                    <span>Descricao da vaga</span>
+                    <span class="label-title">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4"/><path d="M9 11h6M9 15h6M9 19h4"/></svg>
+                        Descricao da vaga
+                    </span>
                     <textarea id="description" name="description" rows="16" placeholder="Cole aqui a descricao completa da vaga..."></textarea>
                 </label>
 
                 <div class="actions">
-                    <button id="submit-button" type="submit">Gerar curriculo</button>
-                    <p id="form-hint">O arquivo da vaga sera salvo em legacy/ e o PDF final em output/.</p>
+                    <button id="submit-button" type="submit">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c5.8-1.2 10.8-6.2 12-12l2-2-1 5 4 3-5 1c-1.5 3.5-4.3 6.3-7.8 7.8l-1 1 .2-3.2L5 19Z"/><path d="M7 15l-4 4M14 6l4 4"/></svg>
+                        Gerar curriculo
+                    </button>
+                    <p id="form-hint">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+                        O arquivo da vaga sera salvo em legacy/ e o PDF final em output/.
+                    </p>
                 </div>
 
                 <div id="feedback" class="feedback" hidden></div>
             </form>
 
             <aside class="panel side-panel">
-                <h2>Fluxo local</h2>
-                <ol>
+                <h2>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.8 8.6-7 10-4.2-1.4-7-5.5-7-10V6l7-3Z"/></svg>
+                    Fluxo de uso
+                </h2>
+                <ol class="flow-list">
                     <li>
-                        <strong>1. Cole a vaga</strong>
-                        <span>Use a descricao completa para o gerador entender contexto, requisitos e stack.</span>
+                        <span class="step-icon step-blue">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4"/><path d="M9 11h6M9 15h6"/></svg>
+                        </span>
+                        <span class="step-copy">
+                            <strong>1. Cole a vaga</strong>
+                            <span>Use a descricao completa para o gerador entender contexto, requisitos e stack.</span>
+                        </span>
                     </li>
                     <li>
-                        <strong>2. Gere o curriculo</strong>
-                        <span>A pipeline existente salva a vaga, cria o HTML e exporta o PDF.</span>
+                        <span class="step-icon step-green">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4l6 6-9 9H5v-6l9-9Z"/><path d="M13 5l6 6"/><path d="M4 4h4M6 2v4"/></svg>
+                        </span>
+                        <span class="step-copy">
+                            <strong>2. Gere o curriculo</strong>
+                            <span>A pipeline existente salva a vaga, cria o HTML e exporta o PDF.</span>
+                        </span>
                     </li>
                     <li>
-                        <strong>3. Revise o PDF final</strong>
-                        <span>Abra o arquivo em output/ e confira layout, links e aderencia a vaga.</span>
+                        <span class="step-icon step-purple">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M14 3v4h4"/><path d="M9 13l2 2 4-5"/></svg>
+                        </span>
+                        <span class="step-copy">
+                            <strong>3. Revise o PDF final</strong>
+                            <span>Abra o arquivo em output/ e confira layout, links e aderencia a vaga.</span>
+                        </span>
                     </li>
                 </ol>
+
+                <div class="privacy-card">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.8 8.6-7 10-4.2-1.4-7-5.5-7-10V6l7-3Z"/><path d="M8.8 12l2.1 2.1 4.4-4.7"/></svg>
+                    <div>
+                        <strong>Privacidade e seguranca</strong>
+                        <span>Tudo processado localmente. Seus dados nao saem da sua maquina.</span>
+                    </div>
+                </div>
             </aside>
         </section>
+
+        <footer class="app-footer">
+            <span>Gerador de Curriculo Inteligente</span>
+            <span>Versao Local</span>
+            <span>Feito para maximizar suas oportunidades</span>
+        </footer>
     </main>
 
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="{{ url_for('static', filename='app.js', v='20260608') }}"></script>
 </body>
 </html>

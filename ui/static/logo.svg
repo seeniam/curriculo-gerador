@@ -1,40 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 170" role="img" aria-label="Gerador de Curriculo Inteligente">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 156 156" role="img" aria-label="Marca Gerador de Curriculo Inteligente">
   <defs>
-    <linearGradient id="paper" x1="34" x2="154" y1="18" y2="146" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f8fdff"/>
-      <stop offset="1" stop-color="#d8f7fb"/>
+    <linearGradient id="brain" x1="45" x2="125" y1="48" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5eead4"/>
+      <stop offset=".52" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#2563eb"/>
     </linearGradient>
-    <linearGradient id="brain" x1="54" x2="136" y1="48" y2="124" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#91edcf"/>
-      <stop offset=".52" stop-color="#45d4cf"/>
-      <stop offset="1" stop-color="#2aa8d8"/>
-    </linearGradient>
-    <linearGradient id="word" x1="205" x2="555" y1="50" y2="130" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#e9fbff"/>
-      <stop offset=".58" stop-color="#71dbe8"/>
-      <stop offset="1" stop-color="#23bac8"/>
-    </linearGradient>
-    <filter id="shadow" x="-10%" y="-25%" width="125%" height="150%">
-      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#064a75" flood-opacity=".3"/>
-    </filter>
   </defs>
-  <g filter="url(#shadow)">
-    <path d="M52 18h69l38 39v82a13 13 0 0 1-13 13H52a13 13 0 0 1-13-13V31a13 13 0 0 1 13-13Z" fill="url(#paper)" stroke="#0d6f99" stroke-width="7"/>
-    <path d="M120 19v28a13 13 0 0 0 13 13h27" fill="#ecffff" stroke="#0d6f99" stroke-width="7" stroke-linejoin="round"/>
-    <path d="M20 68h26m-26 30h26m-26 30h26" fill="none" stroke="#1aa5d6" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="20" cy="68" r="9" fill="#72d6e5" stroke="#075b8d" stroke-width="6"/>
-    <circle cx="20" cy="98" r="9" fill="#72d6e5" stroke="#075b8d" stroke-width="6"/>
-    <circle cx="20" cy="128" r="9" fill="#72d6e5" stroke="#075b8d" stroke-width="6"/>
-    <path d="M59 89c-10-11-3-27 12-27 3-14 21-20 33-10 13-13 37-4 37 15 13 3 19 18 10 29 8 15-6 31-23 28-3 18-29 17-34 1-16 6-34-4-34-20-8-1-14-7-15-16Z" fill="url(#brain)" stroke="#074f82" stroke-width="7" stroke-linejoin="round"/>
-    <path d="M96 54v61m17-58c-10 11-10 23 0 34m-39-10c12-3 21 2 25 11m30 8c-14-3-24 1-30 13" fill="none" stroke="#07537e" stroke-width="7" stroke-linecap="round"/>
-    <circle cx="76" cy="101" r="7" fill="#d4fff5"/>
-    <circle cx="138" cy="96" r="7" fill="#d4fff5"/>
-    <path d="M62 37h21M63 137h45M63 123h73" fill="none" stroke="#59bde0" stroke-width="7" stroke-linecap="round"/>
-  </g>
-  <g font-family="Inter, Segoe UI, Arial, sans-serif" font-weight="800" letter-spacing=".2">
-    <text x="205" y="75" font-size="48" fill="#05243d" opacity=".45">Gerador de Curriculo</text>
-    <text x="205" y="72" font-size="48" fill="url(#word)">Gerador de Curriculo</text>
-    <text x="205" y="130" font-size="48" fill="#05243d" opacity=".45">Inteligente</text>
-    <text x="205" y="127" font-size="48" fill="url(#word)">Inteligente</text>
-  </g>
+  <path d="M49 15h62l32 33v88a12 12 0 0 1-12 12H49a12 12 0 0 1-12-12V27a12 12 0 0 1 12-12Z" fill="none" stroke="#f8fbff" stroke-width="7"/>
+  <path d="M110 16v24a13 13 0 0 0 13 13h20" fill="none" stroke="#f8fbff" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M13 63h31m-31 28h31m-31 28h31" fill="none" stroke="#e8f8ff" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="13" cy="63" r="6" fill="#071a3d" stroke="#e8f8ff" stroke-width="5"/>
+  <circle cx="13" cy="91" r="6" fill="#071a3d" stroke="#e8f8ff" stroke-width="5"/>
+  <circle cx="13" cy="119" r="6" fill="#071a3d" stroke="#e8f8ff" stroke-width="5"/>
+  <path d="M54 89c-10-10-3-25 12-25 3-13 20-18 31-9 12-12 35-4 35 14 12 3 18 17 9 27 8 14-5 29-21 27-3 17-27 16-32 1-14 5-31-4-31-19-8-1-13-6-14-16Z" fill="url(#brain)" stroke="#073b73" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M89 57v57m16-54c-9 10-9 21 0 32m-36-9c12-3 20 1 24 11m28 7c-13-3-22 1-28 12" fill="none" stroke="#f5ffff" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+  <circle cx="72" cy="101" r="6" fill="#ccfbf1"/>
+  <circle cx="128" cy="96" r="6" fill="#ccfbf1"/>
 </svg>
