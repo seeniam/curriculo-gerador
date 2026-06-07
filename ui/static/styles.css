@@ -59,9 +59,16 @@ h1 {
     line-height: 1;
 }
 
+.brand-logo {
+    display: block;
+    width: min(620px, 100%);
+    height: auto;
+    margin-left: -14px;
+}
+
 .subtitle {
     max-width: 660px;
-    margin-top: 12px;
+    margin-top: 6px;
     color: var(--muted);
     font-size: 1.06rem;
 }
