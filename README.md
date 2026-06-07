@@ -91,6 +91,23 @@ Tambem pode combinar com uma vaga especifica:
 python gerador_de_cv.py --job "legacy/vaga-devjr buzz.md" --one-page
 ```
 
+## Modo recomendado: PDF final em 1 pagina
+
+Para gerar no mesmo formato compacto usado nos curriculos mais recentes, mantendo apenas o PDF final:
+
+```bash
+python gerador_de_cv.py --one-page --pdf-only --no-portfolio
+```
+
+No Windows, voce tambem pode dar dois cliques em:
+
+```bat
+gerar_curriculo_pdf.bat
+```
+
+Esse atalho usa automaticamente a vaga mais recente encontrada na raiz do projeto, em `jobs/` ou em `legacy/`.
+Ele gera o PDF em `output/`, remove o HTML intermediario e nao anexa o portfolio visual.
+
 No Windows, tambem pode usar:
 
 ```bat
