@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gerador de Curriculo Inteligente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Curriculo personalizado em PDF</p>
+                <h1>Gerador de Curriculo Inteligente</h1>
+                <p class="subtitle">Cole a descricao da vaga e gere uma versao personalizada do curriculo em PDF.</p>
+            </div>
+            <div class="status-pill">Localhost seguro</div>
+        </section>
+
+        <section class="workspace">
+            <form id="resume-form" class="panel form-panel">
+                <div class="field-grid">
+                    <label>
+                        <span>Cargo / Nome da vaga</span>
+                        <input id="job-title" name="jobTitle" type="text" placeholder="Ex: Desenvolvedor Front End React">
+                    </label>
+                    <label>
+                        <span>Empresa</span>
+                        <input id="company" name="company" type="text" placeholder="Ex: Frete.com">
+                    </label>
+                </div>
+
+                <label class="description-field">
+                    <span>Descricao da vaga</span>
+                    <textarea id="description" name="description" rows="16" placeholder="Cole aqui a descricao completa da vaga..."></textarea>
+                </label>
+
+                <div class="actions">
+                    <button id="submit-button" type="submit">Gerar curriculo</button>
+                    <p id="form-hint">O arquivo da vaga sera salvo em legacy/ e o PDF final em output/.</p>
+                </div>
+
+                <div id="feedback" class="feedback" hidden></div>
+            </form>
+
+            <aside class="panel side-panel">
+                <h2>Fluxo local</h2>
+                <ol>
+                    <li>
+                        <strong>1. Cole a vaga</strong>
+                        <span>Use a descricao completa para o gerador entender contexto, requisitos e stack.</span>
+                    </li>
+                    <li>
+                        <strong>2. Gere o curriculo</strong>
+                        <span>A pipeline existente salva a vaga, cria o HTML e exporta o PDF.</span>
+                    </li>
+                    <li>
+                        <strong>3. Revise o PDF final</strong>
+                        <span>Abra o arquivo em output/ e confira layout, links e aderencia a vaga.</span>
+                    </li>
+                </ol>
+            </aside>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
