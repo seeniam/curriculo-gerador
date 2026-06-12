@@ -15,5 +15,6 @@ output/**/*.html
 output/**/*.pdf
 output/**/*.txt
 output/.browser-profile*/
+output/**/.browser-profile*/
 output/.edge-profile/
 output/.codex-cli/

@@ -475,6 +475,10 @@ def find_browser_executable() -> str | None:
     browser_candidates = (
         "msedge",
         "chrome",
+        "google-chrome",
+        "google-chrome-stable",
+        "chromium",
+        "chromium-browser",
         r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
         r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
         r"C:\Program Files\Google\Chrome\Application\chrome.exe",
@@ -488,42 +492,76 @@ def find_browser_executable() -> str | None:
     return None
 
 
+def run_browser_pdf_export(
+    *,
+    browser_executable: str,
+    html_output_path: Path,
+    pdf_output_path: Path,
+    browser_profile_dir: Path,
+) -> subprocess.CompletedProcess[str]:
+    if os.name == "nt":
+        html_path_escaped = str(html_output_path.resolve()).replace("'", "''")
+        pdf_path_escaped = str(pdf_output_path.resolve()).replace("'", "''")
+        profile_path_escaped = str(browser_profile_dir.resolve()).replace("'", "''")
+        browser_path_escaped = browser_executable.replace("'", "''")
+        powershell_command = (
+            f"$html = Resolve-Path '{html_path_escaped}'; "
+            f"$pdf = '{pdf_path_escaped}'; "
+            f"$profile = '{profile_path_escaped}'; "
+            "New-Item -ItemType Directory -Force -Path $profile | Out-Null; "
+            f"& '{browser_path_escaped}' '--headless=new' '--disable-gpu' '--no-first-run' "
+            "'--disable-crash-reporter' '--disable-breakpad' '--no-default-browser-check' "
+            "\"--user-data-dir=$profile\" '--no-pdf-header-footer' '--print-to-pdf-no-header' "
+            "\"--print-to-pdf=$pdf\" $html.Path"
+        )
+        return subprocess.run(
+            ["powershell", "-Command", powershell_command],
+            capture_output=True,
+            text=True,
+            check=False,
+            timeout=45,
+        )
+
+    command = [
+        browser_executable,
+        "--headless=new",
+        "--disable-gpu",
+        "--no-sandbox",
+        "--no-first-run",
+        "--disable-crash-reporter",
+        "--disable-breakpad",
+        "--no-default-browser-check",
+        f"--user-data-dir={browser_profile_dir.resolve()}",
+        "--no-pdf-header-footer",
+        "--print-to-pdf-no-header",
+        f"--print-to-pdf={pdf_output_path.resolve()}",
+        html_output_path.resolve().as_uri(),
+    ]
+    return subprocess.run(
+        command,
+        capture_output=True,
+        text=True,
+        check=False,
+        timeout=45,
+    )
+
+
 def export_html_to_pdf(html_output_path: Path) -> Path | None:
     browser_executable = find_browser_executable()
     if not browser_executable:
-        print("[!] PDF export skipped: Chrome/Edge executable not found.")
+        print("[!] PDF export skipped: Chrome/Chromium/Edge executable not found.")
         return None
 
     pdf_output_path = build_pdf_output_path(html_output_path)
     browser_profile_dir = html_output_path.parent / ".browser-profile"
     ensure_directory(browser_profile_dir)
-    html_path_escaped = str(html_output_path.resolve()).replace("'", "''")
-    pdf_path_escaped = str(pdf_output_path.resolve()).replace("'", "''")
-    profile_path_escaped = str(browser_profile_dir.resolve()).replace("'", "''")
-    browser_path_escaped = browser_executable.replace("'", "''")
-    powershell_command = (
-        f"$html = Resolve-Path '{html_path_escaped}'; "
-        f"$pdf = '{pdf_path_escaped}'; "
-        f"$profile = '{profile_path_escaped}'; "
-        "New-Item -ItemType Directory -Force -Path $profile | Out-Null; "
-        f"& '{browser_path_escaped}' '--headless=new' '--disable-gpu' '--no-first-run' "
-        "'--disable-crash-reporter' '--disable-breakpad' '--no-default-browser-check' "
-        "\"--user-data-dir=$profile\" '--no-pdf-header-footer' '--print-to-pdf-no-header' "
-        "\"--print-to-pdf=$pdf\" $html.Path"
-    )
-    command = [
-        "powershell",
-        "-Command",
-        powershell_command,
-    ]
 
     try:
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            check=False,
-            timeout=45,
+        result = run_browser_pdf_export(
+            browser_executable=browser_executable,
+            html_output_path=html_output_path,
+            pdf_output_path=pdf_output_path,
+            browser_profile_dir=browser_profile_dir,
         )
     except OSError as exc:
         print(f"[!] PDF export skipped: failed to start browser ({exc}).")
