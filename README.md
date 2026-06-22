@@ -1,178 +1,284 @@
-# Codex Tailored CV Generator
+# Gerador de Curriculo Inteligente
 
-## Nova arquitetura
+Aplicacao local em Python/Flask para gerar curriculos personalizados em PDF a partir da descricao de uma vaga.
 
-Este projeto agora separa claramente:
+O fluxo principal e simples:
 
-- `career/` = source of truth da carreira em Markdown
-- `templates/` = template de apresentacao HTML/CSS
-- `generator/` = pipeline e personas
-- `legacy/` = arquivos antigos preservados como referencia
-- `output/` = curriculos gerados
+1. Clicar no atalho `.bat` na area de trabalho.
+2. A interface web abre no navegador.
+3. Colar a descricao da vaga.
+4. Clicar em `Gerar curriculo`.
+5. O sistema salva a vaga localmente e gera o PDF final.
 
-## Source of truth
+## O que sobe para o Git
 
-O arquivo principal agora e `career/career_master.md`.
+Este repositorio deve subir apenas o que automatiza a geracao do curriculo:
 
-Ele deve conter a verdade estruturada da sua carreira:
+- codigo Python da pipeline;
+- UI Flask;
+- templates HTML/CSS;
+- scripts `.bat`;
+- configuracoes de deploy;
+- documentacao;
+- base mestre em `career/`;
+- arquivos de referencia necessarios para a pipeline.
 
-- identidade
-- posicionamento
-- experiencias
-- projetos
-- resultados
-- formacao
-- certificacoes
-- idiomas
-- provas de senioridade
-- restricoes de verdade
+Nao devem subir:
 
-`career/raw_notes.md` e um apoio para anotar conteudo cru ainda nao lapidado.
+- vagas geradas em `legacy/vaga*.md`;
+- curriculos temporarios em `legacy/curriculo*.md`;
+- PDFs, HTMLs, imagens ou textos gerados em `output/`;
+- `.env`;
+- `__pycache__/`;
+- perfis temporarios de navegador;
+- arquivos temporarios do Codex CLI.
 
-## Template
+Essas regras ficam em `.gitignore`.
 
-O HTML nao e mais a base de conhecimento.
+## Estrutura principal
 
-Agora:
+```text
+career/
+  career_master.md          base principal da carreira
+  raw_notes.md              notas opcionais
 
-- `templates/resume_base.html` define a estrutura semantica
-- `templates/resume.css` define a apresentacao
+generator/
+  pipeline.py               pipeline principal de geracao
+  ui_service.py             integra UI Flask com a pipeline
+  io_utils.py               funcoes de leitura, busca e diretorios
+  persona_headhunter_*.md   personas usadas no prompt
 
-O gerador usa esses arquivos para orientar o HTML final ATS-friendly.
+templates/
+  resume_base.html          template HTML do curriculo
+  resume.css                estilos do curriculo
 
-Ao final da geracao, o pipeline usa o Codex CLI em modo nao interativo e salva:
+ui/
+  app.py                    aplicacao Flask
+  templates/index.html      tela web local
+  static/                   CSS, JS, logo e favicon da UI
 
-- o arquivo `.html`
-- o arquivo `.pdf` correspondente, gerado automaticamente via Chrome/Edge headless quando disponivel
+legacy/
+  default.html              referencia legada em ingles
+  default_pt.html           referencia legada em portugues
+  vaga*.md                  vagas geradas localmente, ignoradas pelo Git
 
-Isso melhora a consistencia da exportacao e tende a preservar hyperlinks clicaveis no PDF final.
-O fluxo continua sendo sempre `HTML primeiro -> PDF depois`.
+output/
+  *.pdf                     curriculos gerados, ignorados pelo Git
 
-## Como gerar
-
-1. Garanta que o Codex CLI esteja instalado e autenticado.
-2. Preencha `career/career_master.md`.
-3. Opcionalmente preencha `career/raw_notes.md`.
-4. Coloque uma vaga em um arquivo `vaga*.md` ou `job*.md` no diretorio raiz, em `jobs/` ou use um arquivo legado em `legacy/`.
-5. Opcionalmente crie `.env` com `CODEX_CLI_PATH`, `CODEX_MODEL` ou `CODEX_PROFILE` se quiser fixar o executavel/modelo/perfil.
-6. Rode:
-
-```bash
-python gerador_de_cv.py
-```
-
-Para gerar para todas as vagas detectadas:
-
-```bash
-python gerador_de_cv.py --all
-```
-
-Para gerar apenas para uma vaga específica:
-
-```bash
-python gerador_de_cv.py --job legacy/vaga_itss.md
-```
-
-Para forcar um nome especifico de saida:
-
-```bash
-python gerador_de_cv.py --job "legacy/vaga-dev frontend pleno.md" --output-name curriculo-frontend_neemias.pdf
-```
-
-Para gerar uma versao compacta pensada para caber em 1 pagina A4:
-
-```bash
-python gerador_de_cv.py --one-page
-```
-
-Tambem pode combinar com uma vaga especifica:
-
-```bash
-python gerador_de_cv.py --job "legacy/vaga-devjr buzz.md" --one-page
-```
-
-## Modo recomendado: PDF final em 1 pagina
-
-Para gerar no mesmo formato compacto usado nos curriculos mais recentes, mantendo apenas o PDF final:
-
-```bash
-python gerador_de_cv.py --one-page --pdf-only --no-portfolio
-```
-
-No Windows, voce tambem pode dar dois cliques em:
-
-```bat
+abrir_gerador_curriculo_ui.bat
 gerar_curriculo_pdf.bat
+gerar_cv_automatico.bat
+gerador_de_cv.py
+requirements.txt
 ```
 
-Esse atalho usa automaticamente a vaga mais recente encontrada na raiz do projeto, em `jobs/` ou em `legacy/`.
-Ele gera o PDF em `output/`, remove o HTML intermediario e nao anexa o portfolio visual.
+## Requisitos
 
-## Gerador com Interface Local
+- Windows para uso pelos `.bat`.
+- Python instalado e disponivel no terminal.
+- Codex CLI instalado e autenticado.
+- Chrome, Edge ou Chromium instalado para exportar PDF.
 
-A interface local automatiza a entrada da vaga, mas nao substitui a pipeline. Ela salva a descricao em `legacy/`, chama o mesmo gerador Python e coloca o PDF final em `output/`.
+Dependencias Python:
 
-Para abrir a UI no Windows:
+```bash
+pip install -r requirements.txt
+```
+
+O `.bat` da UI tenta instalar as dependencias automaticamente se o Flask nao estiver disponivel.
+
+## Configuracao opcional
+
+Crie um arquivo `.env` na raiz se quiser fixar caminho/modelo/perfil do Codex CLI:
+
+```env
+CODEX_CLI_PATH=
+CODEX_MODEL=
+CODEX_PROFILE=
+```
+
+Para deploy privado, tambem use:
+
+```env
+APP_ACCESS_TOKEN=um-token-longo-e-privado
+PORT=
+```
+
+Nunca commite `.env`.
+
+## Como usar pela interface local
+
+O arquivo principal para uso diario e:
 
 ```bat
 abrir_gerador_curriculo_ui.bat
 ```
 
-Depois:
+Ele faz o seguinte:
 
-1. Cole a descricao da vaga.
-2. Informe cargo e empresa.
-3. Clique em `Gerar curriculo`.
-4. Revise o PDF final salvo em `output/`.
+1. Entra na pasta do projeto.
+2. Ativa `.venv`, se existir.
+3. Verifica dependencias basicas.
+4. Abre `http://127.0.0.1:5000`.
+5. Inicia o Flask com `python ui\app.py`.
 
-A aplicacao roda localmente em:
+Na tela:
+
+1. Informe o cargo ou nome da vaga.
+2. Informe a empresa.
+3. Cole a descricao completa da vaga.
+4. Clique em `Gerar curriculo`.
+5. Aguarde o estado de sucesso.
+6. Clique em `Abrir PDF` ou veja o arquivo em `output/`.
+
+O sistema salva:
+
+- a vaga em `legacy/`;
+- o PDF final em `output/`.
+
+Esses arquivos sao locais e nao devem ser versionados.
+
+## Criar atalho na area de trabalho
+
+Para deixar o fluxo com um clique:
+
+1. Encontre `abrir_gerador_curriculo_ui.bat` na raiz do projeto.
+2. Clique com o botao direito.
+3. Escolha `Enviar para > Area de trabalho (criar atalho)`.
+4. Renomeie o atalho para `Gerador de Curriculo Inteligente`, se quiser.
+
+Depois disso, basta clicar no atalho da area de trabalho para abrir o site local.
+
+## Fluxo interno da geracao
+
+Quando voce clica em `Gerar curriculo`, a UI chama:
 
 ```text
-http://127.0.0.1:5000
+POST /generate
 ```
 
-Se o Flask ainda nao estiver instalado, o BAT tenta instalar as dependencias minimas de `requirements.txt`.
+O backend executa este fluxo:
 
-No Windows, tambem pode usar:
+1. `ui/app.py` recebe os dados da vaga.
+2. `generator/ui_service.py` salva a descricao em `legacy/`.
+3. O servico chama a pipeline via subprocess:
 
-```bat
-gerar_cv_automatico.bat
+```bash
+python gerador_de_cv.py --job <vaga> --one-page --pdf-only --no-portfolio --output-name <arquivo.pdf>
 ```
 
-## Compatibilidade
+4. `generator/pipeline.py` carrega `career/career_master.md`.
+5. A pipeline monta o prompt com a vaga, templates e personas.
+6. O Codex CLI gera o HTML final.
+7. O HTML e sanitizado e ajustado para uma pagina.
+8. Chrome/Edge/Chromium headless exporta o PDF.
+9. O HTML temporario e removido.
+10. A UI mostra o link do PDF.
 
-Os arquivos antigos foram preservados em `legacy/`.
-O pipeline atual continua aproveitando esse material como referencia, mas a fonte principal de verdade agora e o Markdown em `career/career_master.md`.
+## Geracao por terminal
 
-## Provedor de IA
+Gerar usando a vaga mais recente:
 
-Esta branch alternativa nao usa Gemini nem `GEMINI_API_KEY`.
+```bash
+python gerador_de_cv.py --one-page --pdf-only --no-portfolio
+```
 
-No Windows, o gerador tenta encontrar o Codex no `PATH` e tambem dentro das extensoes do VS Code/Cursor. Se ainda assim nao encontrar, defina no `.env`:
+Gerar para uma vaga especifica:
+
+```bash
+python gerador_de_cv.py --job "legacy/nome-da-vaga.md" --one-page --pdf-only --no-portfolio
+```
+
+Gerar com nome de saida definido:
+
+```bash
+python gerador_de_cv.py --job "legacy/nome-da-vaga.md" --one-page --pdf-only --no-portfolio --output-name "Curriculo - Minha Vaga.pdf"
+```
+
+## Scripts BAT
+
+`abrir_gerador_curriculo_ui.bat`
+
+Abre a interface web local. Este e o fluxo recomendado.
+
+`gerar_curriculo_pdf.bat`
+
+Gera um PDF direto pela vaga mais recente, sem abrir a UI.
+
+`gerar_cv_automatico.bat`
+
+Executa o fluxo legado mais amplo.
+
+## Deploy privado
+
+A aplicacao Flask esta preparada para Gunicorn:
+
+```bash
+gunicorn ui.app:app --bind 0.0.0.0:$PORT
+```
+
+Em producao, configure obrigatoriamente:
 
 ```env
-CODEX_CLI_PATH=C:\Users\neemi\.vscode\extensions\openai.chatgpt-26.406.31014-win32-x64\bin\windows-x86_64\codex.exe
+APP_ACCESS_TOKEN=um-token-longo-e-privado
 ```
 
-O gerador chama:
+Se `PORT` estiver definido e `APP_ACCESS_TOKEN` nao estiver configurado, a UI bloqueia o acesso.
+
+Para Linux, o ambiente precisa ter Chrome ou Chromium disponivel para gerar PDF.
+
+Mais detalhes estao em:
+
+```text
+docs/DEPLOY_AUDIT.md
+```
+
+## Cuidados antes de commit
+
+Antes de commitar, confira:
 
 ```bash
-codex exec -
+git status --short
 ```
 
-O prompt completo e enviado via stdin, e a ultima mensagem do Codex e tratada como o HTML final. O restante do fluxo continua igual: sanitizacao, modo 1 pagina, salvamento em `output/` e exportacao PDF via Chrome/Edge quando disponivel.
+Pode commitar:
 
-## Portfolio visual
+- codigo;
+- templates;
+- UI;
+- `.bat`;
+- docs;
+- `requirements.txt`;
+- `.env.example`;
+- `.gitignore`;
+- `career/career_master.md`.
 
-Se existir um arquivo `portfolio-visual.pdf` na raiz do projeto, ele sera anexado automaticamente ao final do PDF exportado do curriculo.
+Nao commitar:
 
-O PDF final fica no mesmo arquivo de saida, com esta ordem:
+- `legacy/vaga*.md`;
+- `legacy/curriculo*.md`;
+- `output/`;
+- `*.pdf` gerado;
+- `.env`;
+- `__pycache__/`.
 
-1. Curriculo gerado para a vaga
-2. `portfolio-visual.pdf` como pagina(s) final(is)
+## Validacao rapida
 
-Para isso, o projeto usa `pypdf`:
+Compile os modulos Python:
 
 ```bash
-pip install pypdf
+python -m compileall generator ui
 ```
+
+Abra a UI:
+
+```bat
+abrir_gerador_curriculo_ui.bat
+```
+
+Gere um curriculo de teste e confirme:
+
+- a vaga foi salva em `legacy/`;
+- o PDF saiu em `output/`;
+- o botao `Abrir PDF` funciona;
+- `git status --short` nao mostra `legacy/vaga*.md` nem arquivos de `output/` como itens para commit.

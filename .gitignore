@@ -8,12 +8,26 @@ __pycache__/
 *.tmp
 *.temp
 
+legacy/vaga*.md
+legacy/vaga*/
+legacy/**/vaga*.md
+legacy/curriculo*.md
+
+output/
 output/*.html
 output/*.pdf
 output/*.txt
+output/*.png
+output/*.jpg
+output/*.jpeg
+output/*.webp
 output/**/*.html
 output/**/*.pdf
 output/**/*.txt
+output/**/*.png
+output/**/*.jpg
+output/**/*.jpeg
+output/**/*.webp
 output/.browser-profile*/
 output/**/.browser-profile*/
 output/.edge-profile/
